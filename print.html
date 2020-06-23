@@ -238,8 +238,7 @@ fn main() {
 </code></pre></pre>
 <h3><a class="header" href="#回文数字完整代码" id="回文数字完整代码">回文数字完整代码</a></h3>
 <p>有了上面的反转,只需要判断下 反转后的代码是否与原文一致即可,但是下面代码 还对 某些特殊的数字 比如负数、能被10整除的数、0~10的数字 直接做出判断、做了一些特殊条件的处理。</p>
-<pre><pre class="playpen"><code class="language-rust editable">editable = true
-pub fn is_palindrome(x: i32) -&gt; bool {
+<pre><pre class="playpen"><code class="language-rust editable">pub fn is_palindrome(x: i32) -&gt; bool {
     // [0,10)之间的数 都为 true
     if(x &lt; 10 &amp;&amp; x &gt;=0){return true;}
     //如果 -开头的 和 100、1000 这样的直接排除
