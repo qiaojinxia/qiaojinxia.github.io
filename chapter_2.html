@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>leetcodebyrust</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Leetcode 第1题 - 两数之和(easy) - leetcodebyrust</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,143 +147,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#欢迎来到草帽boy的leetcode笔记" id="欢迎来到草帽boy的leetcode笔记">欢迎来到草帽Boy的Leetcode笔记</a></h1>
-<img src="./image-20200623145600658.png" alt="image-20200623145600658" style="zoom:50%;" />
-<h4><a class="header" href="#本站记录一些本人使用rust的刷题心得大爷如果您觉得对您有用--可以打赏哦" id="本站记录一些本人使用rust的刷题心得大爷如果您觉得对您有用--可以打赏哦">本站记录一些本人使用Rust的刷题心得,大爷如果您觉得对您有用 ↓ 可以打赏哦!</a></h4>
-<p>本项目,目标 每天至少完成一道 leetcode,至少持续 一年,欢迎各位监督。</p>
-<ul>
-<li><input disabled="" type="checkbox" checked=""/>
-2020-06.25 -- 两数之和(medium)</li>
-<li><input disabled="" type="checkbox"/>
-</li>
-</ul>
-<p>微信打赏 : </p>
-<img src="./lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509.jpg" alt="lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509" style="zoom:33%;" />
-<h3><a class="header" href="#微信号eismc_2-----" id="微信号eismc_2-----">微信号:eismc_2     👌</a></h3>
-<blockquote>
-<p>ps : 代码可以在线运行调试哦! </p>
-</blockquote>
-<h4><a class="header" href="#本网站托全管于-github" id="本网站托全管于-github">本网站托全管于 github</a></h4>
-<p><a href="https://github.com/qiaojinxia/qiaojinxia.github.io" data-title="" data-alt="GitHub followers" data-lightbox="roadtrip"><img src="https://img.shields.io/github/stars/snowdreams1006/snowdreams1006.github.io.svg?style=social" alt="GitHub followers" loading="lazy"></a></p>
-<p><a href="https://github.com/facebook/react/blob/master/LICENSE"><a href="https://img.shields.io/badge/license-MIT-blue.svg" data-title="" data-alt="GitHub license" data-lightbox="roadtrip"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" loading="lazy"></a></a></p>
-<h1><a class="header" href="#leetcode-第9题---回文数easy" id="leetcode-第9题---回文数easy">Leetcode 第9题 - 回文数(easy)</a></h1>
-<p>题目:判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-<p><strong>示例 1:</strong></p>
-<pre><code>输入: 121
-输出: true
-</code></pre>
-<p><strong>示例 2:</strong></p>
-<pre><code>输入: -121
-输出: false
-解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
-</code></pre>
-<p><strong>示例 3:</strong></p>
-<pre><code>输入: 10
-输出: false
-解释: 从右向左读, 为 01 。因此它不是一个回文数。
-</code></pre>
-<h2><a class="header" href="#编码实现思路" id="编码实现思路">编码实现思路</a></h2>
-<p>Leetocde模板代码:</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
-</span><span class="boring">fn main() {
-</span>impl Solution {
-    pub fn is_palindrome(x: i32) -&gt; bool {
-        
-
-    }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h3><a class="header" href="#实现思路" id="实现思路">实现思路</a></h3>
-<p>这里我们先要熟悉,一个基本操作 一个数数 取个位只需要取余( % 10) </p>
-<blockquote>
-<p>101 % 10 = 1</p>
-</blockquote>
-<p>如果要把每一位 取出来 就需要 循环 /10  %10</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn takenum(x: i32) {
-   let mut tmp = x;
-    while tmp &gt;1 {
-        print!(&quot;{} &quot;,tmp%10);
-        tmp = tmp /10;
-    }
-    println!();
-
-}
-
-fn main() {
-    takenum(543);
-}
-</code></pre></pre>
-<p>leetcode给定的是 一个 i32数字,我们的思路是这样的 把 一个数字 比如 123 -&gt; 反转 成 321  如果判断反转后的数字,和原数字相等 那么 就是回文数字。</p>
-<blockquote>
-<p>example : 121 -&gt;</p>
-<p>tmp1 = 取个位1 *  10 = 10</p>
-<p>tmp1 += 取十位2 * 10  = (tmp1 + 2) * 10 = (10 +2) * 10 =120</p>
-<p>tmp1 += 取百位1 * 10 =(tmp1 + 1) * 10 = (120 +2) * 10 =1210 </p>
-<p>最后 tmp1 /10 = 121 </p>
-</blockquote>
-<h3><a class="header" href="#反转一个整数" id="反转一个整数">反转一个整数</a></h3>
-<blockquote>
-<p>example : 123 -&gt; 321 121-&gt;121 </p>
-</blockquote>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn reverse(x: i32) -&gt; i32{
-    let mut tmp = x;
-    let mut tmp1 = 0;
-    while (tmp &gt;= 1) {
-            // 123 第一次  temp1 30 tmp 12 -&gt; 第二次 320 1 -&gt; 第三次 3210 0.1 小于1 跳出循环 这样就完成了颠倒数字
-        tmp1 = (tmp1 + tmp % 10 )* 10;
-        tmp = tmp / 10;
-    }
-    tmp1 /10
-
-}
-
-fn main() {
-
-    println!(&quot;{}&quot;,reverse(123));
-}
-</code></pre></pre>
-<h3><a class="header" href="#回文数字完整代码" id="回文数字完整代码">回文数字完整代码</a></h3>
-<p>有了上面的反转,只需要判断下 反转后的代码是否与原文一致即可,但是下面代码 还对 某些特殊的数字 比如负数、能被10整除的数、0~10的数字 直接做出判断、做了一些特殊条件的处理。</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn is_palindrome(x: i32) -&gt; bool {
-    // [0,10)之间的数 都为 true
-    if(x &lt; 10 &amp;&amp; x &gt;=0){return true;}
-    //如果 -开头的 和 100、1000 这样的直接排除
-    if(x &lt; 0 || x % 10 ==0 ){ return false }
-    let mut tmp = x;
-    let mut tmp1 = 0;
-    while (tmp &gt;= 1) {
-        //将数字颠倒  123 先取出 3* 10 在把tmp更新成 12
-       //这里加 if 是因为 如果是10位数 最后一次个位数再乘以10 -&gt; 11位数 就超出 i32 的最大值了 就会报错!
-        if  tmp &lt; 10 { tmp1 = (tmp1 + tmp % 10 )}
-        else{
-            // 123 第一次  temp1 30 tmp 12 -&gt; 第二次 320 1 -&gt; 第三次 3210 0.1 小于1 跳出循环 这样就完成了颠倒数字
-            tmp1 = (tmp1 + tmp % 10 )* 10;
-        }
-        tmp = tmp / 10;
-    }
-    //123 -&gt; 321 不相等 121 -&gt; 121 相等
-    if tmp1 == x {
-        return true;
-    }
-    return false;
-}
-
-//测试代码
-fn main() {
-    println!(&quot;{}&quot;,is_palindrome(123));
-    println!(&quot;{}&quot;,is_palindrome(121));
-    println!(&quot;{}&quot;,is_palindrome(1000000001));
-
-}
-
-</code></pre></pre>
-<h3><a class="header" href="#提交结果" id="提交结果">提交结果：</a></h3>
-<p><img src="./image-20200623143110412.png" alt="image-20200623143110412" /></p>
-<p>ps:点击编辑器右上角 图标可运行代码哦!</p>
-<img src="./image-20200623170053603.png" alt="image-20200623170053603" style="zoom:55%;" />
-<h1><a class="header" href="#leetcode-第1题-两数之和easy" id="leetcode-第1题-两数之和easy">Leetcode 第1题 两数之和(easy)</a></h1>
+                        <h1><a class="header" href="#leetcode-第1题-两数之和easy" id="leetcode-第1题-两数之和easy">Leetcode 第1题 两数之和(easy)</a></h1>
 <blockquote>
 <p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p>
@@ -375,6 +237,10 @@ impl Solution {
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
 
@@ -384,6 +250,10 @@ impl Solution {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 
@@ -424,14 +294,6 @@ impl Solution {
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
