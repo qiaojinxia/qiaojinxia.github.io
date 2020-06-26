@@ -413,6 +413,7 @@ impl Solution {
 <p>你可以看到 我们一般 就只需要背一般剩余一半,只不过是镜像反转了 (i)1* (j)2 和 (i)2*(j)1是一样的。</p>
 <p>下面 我们先不考虑第二点,把最简单的 一个暴力算法写出可运行的结果。</p>
 <pre><pre class="playpen"><code class="language-rust editable">//----&gt;点击右上角 编辑调试代码
+use std::collections::HashMap;
 pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
     let mut res =vec![];
     for i in  0..nums.len() {
@@ -442,7 +443,8 @@ fn main() {
 <p>[[-1, 0, 1], [-1, 2, -1], [0, 1, -1]]</p>
 </blockquote>
 <p>我们可以在 循环前先对数组排序,然后每层都去判断前一个数字是否和当前相同 相同 就跳过。</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+<pre><pre class="playpen"><code class="language-rust editable">use std::collections::HashMap;
+pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
     let mut nums = nums;
     nums.sort();
     let mut res =vec![];
@@ -495,7 +497,8 @@ fn main() {
 <p>接下来 我们  满足 b + c = d 的解可能是有 多组的,同时 我们还要注意 一点 b + c  和 c + b 也是同一组解,所以遇到这种情况 我们也要过滤掉。我们还需要注意 当 a 被用掉后 b 和 c 也不能用 a 的值 ,</p>
 <p>因为本质上 a + b + c =0 可以设 a =b 这样 就可以变成 b + a  + c =0 这样 也是重复的解,只是位置换了。</p>
 <p>我们 把 先前的 2数之和稍微改动下,就能使用了。</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+<pre><pre class="playpen"><code class="language-rust editable">use std::collections::HashMap;
+pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
         let mut i = 0;
         let mut nums = nums;
         //排序
