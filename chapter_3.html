@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>草帽Boy的leetcode笔记 - leetcodebyrust</title>
+        <title>Leetcode 第15题 - 三数之和(medium) - leetcodebyrust</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,37 +150,187 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#欢迎来到草帽boy的leetcode笔记" id="欢迎来到草帽boy的leetcode笔记">欢迎来到草帽Boy的Leetcode笔记</a></h1>
-<img src="./image-20200623145600658.png" alt="image-20200623145600658" style="zoom:50%;" />
-<h4><a class="header" href="#本站记录一些本人使用rust的刷题心得大爷如果您觉得对您有用--可以打赏哦" id="本站记录一些本人使用rust的刷题心得大爷如果您觉得对您有用--可以打赏哦">本站记录一些本人使用Rust的刷题心得,大爷如果您觉得对您有用 ↓ 可以打赏哦!</a></h4>
-<p>本项目,目标 每天至少完成一道 leetcode,至少持续 一年,欢迎各位监督。</p>
-<ul>
-<li><input disabled="" type="checkbox" checked=""/>
-2020-06.25 -- 两数之和(easy)</li>
-<li><input disabled="" type="checkbox"/>
-2020-06.26 -- 三数之和(medium)</li>
-</ul>
-<p>微信打赏 : </p>
-<img src="./lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509.jpg" alt="lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509" style="zoom:33%;" />
-<h3><a class="header" href="#微信号eismc_2-----" id="微信号eismc_2-----">微信号:eismc_2     👌</a></h3>
+                        <h1><a class="header" href="#leetcode-第15题---三数之和medium" id="leetcode-第15题---三数之和medium">Leetcode 第15题 - 三数之和(medium)</a></h1>
 <blockquote>
-<p>ps : 代码可以在线运行调试哦! </p>
+<p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
 </blockquote>
-<h4><a class="header" href="#本网站托全管于-github" id="本网站托全管于-github">本网站托全管于 github</a></h4>
-<h4><a class="header" href="#本网站使用mdbook生成所有源代码都是在a-hrefhttpsgithubcomrust-lang-nurserymdbookmozilla-public-license-v20a下发布的" id="本网站使用mdbook生成所有源代码都是在a-hrefhttpsgithubcomrust-lang-nurserymdbookmozilla-public-license-v20a下发布的">本网站使用mdBook生成,所有源代码,都是在<a href="https://github.com/rust-lang-nursery/mdBook/">Mozilla Public License v2.0</a>下发布的</a></h4>
-<p><a href="https://github.com/qiaojinxia/qiaojinxia.github.io" data-title="" data-alt="GitHub followers" data-lightbox="roadtrip"><img src="https://img.shields.io/github/stars/snowdreams1006/snowdreams1006.github.io.svg?style=social" alt="GitHub followers" loading="lazy"></a></p>
-<p><a href="https://github.com/facebook/react/blob/master/LICENSE"><a href="https://img.shields.io/badge/license-MIT-blue.svg" data-title="" data-alt="GitHub license" data-lightbox="roadtrip"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license" loading="lazy"></a></a></p>
+<h2><a class="header" href="#示例" id="示例">示例</a></h2>
+<blockquote>
+<p>给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
+<p>满足要求的三元组集合为：
+[
+[-1, 0, 1],
+[-1, -1, 2]
+]</p>
+</blockquote>
+<h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
+<p>这道题目和求2树之和类似,多了一个数。那么最自然的想法 也是写算法中常用的的思维能不能把问题规模变小。</p>
+<p>题目中 给出了注意事项 **答案中不可以包含重复的三元组。**那这是什么意思呢 ?</p>
+<p>[-1, 0, 1, 2, -1, -4]  我们把解写成索引形式 -&gt; </p>
+<blockquote>
+<ol>
+<li>
+<p>[0, 1, 2] 对应 -1 + 0 + 1 =0</p>
+</li>
+<li>
+<p>[0, 3, 4] 对应 -1 + 2 + -1 =0 </p>
+</li>
+<li>
+<p>[1, 2, 4] 对应  0 + 1 + -1 = 0</p>
+</li>
+</ol>
+</blockquote>
+<p>但是你可以看到 其实 第1组 和 第3组只是数的位置不一样 里面的数字是一样的,题目就是想说明这一点,所以 我们在对得出结果后还要对相同的组进行去重。</p>
+<p>a + b  + c = 0 是不是和 2数之和很相似,如果稍微改动下 变成 a + b = -c ,不就变成了2数之和了吗,那么 我们只要一层for 循环 来遍历 不同的c 就好了。 [-1, 0, 1, 2, -1, -4]  我们可以把 数组里面 的每一个数 当做 c 然后再去找 a 和 b。</p>
+<h1><a class="header" href="#暴力解法" id="暴力解法">暴力解法</a></h1>
+<p>时间复杂度：$O_{(n^{3})}$</p>
+<p>空间复杂度：$$O(1)$$</p>
+<h4><a class="header" href="#暴力解法-很简单-但是我们要注意的点" id="暴力解法-很简单-但是我们要注意的点">暴力解法 很简单 但是我们要注意的点</a></h4>
+<ol>
+<li>第一层循环i 从0 开始 第二层循环j 从i 开始 第三层循环m 从j 开始,为什么呢想像小时候的乘法口诀表 ?</li>
+</ol>
+<img src="./image-20200626103950720.png" alt="image-20200626103950720" style="zoom:30%;" />
+<ol start="2">
+<li>如果数组中有重复的元素 比如上面的 -1 ,我们需要去下重,否则 就会有2个同一答案  比如 [-1, 0, 1]   [0, 1, -1]</li>
+</ol>
+<p>你可以看到 我们一般 就只需要背一般剩余一半,只不过是镜像反转了 (i)1* (j)2 和 (i)2*(j)1是一样的。</p>
+<p>下面 我们先不考虑第二点,把最简单的 一个暴力算法写出可运行的结果。</p>
+<pre><pre class="playpen"><code class="language-rust editable">//----&gt;点击右上角 编辑调试代码
+pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+    let mut res =vec![];
+    for i in  0..nums.len() {
+        for j in  i+1..nums.len() {
+            for m in  j+1..nums.len() {
+                if  nums[i] + nums[j] + nums[m] == 0{
+                    let mut tmp =vec![];
+                    tmp.push( nums[i]);
+                    tmp.push(nums[j]);
+                    tmp.push(nums[m]);
+                    res.push(tmp);
+                }
+            }
+
+        }
+
+    }
+    res
+}
+fn main() {
+    let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+}
+</code></pre></pre>
+<p>最后的结果 输出 :</p>
+<blockquote>
+<p>[[-1, 0, 1], [-1, 2, -1], [0, 1, -1]]</p>
+</blockquote>
+<p>我们可以在 循环前先对数组排序,然后每层都去判断前一个数字是否和当前相同 相同 就跳过。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+    let mut nums = nums;
+    nums.sort();
+    let mut res =vec![];
+    let mut flag = None;
+
+    for i in  0..nums.len() {
+    	//如果和前一个相同 就跳过
+        if  { flag != None &amp;&amp; flag ==  Some(nums[i])}{continue;}
+        flag = Some(nums[i]);
+        let mut flag1 = None;
+        for j in  i+1..nums.len() {
+        	 //如果和前一个相同 就跳过
+            if flag1 != None &amp;&amp;  flag1 ==  Some(nums[j]) { continue }
+            flag1 = Some(nums[j]);
+            let mut flag2 = None;
+            for m in  j+1..nums.len() {
+               //如果和前一个相同 就跳过
+                if flag2 != None &amp;&amp;  flag2 ==  Some(nums[m]) { continue }
+                flag2 = Some(nums[m]);
+                if  nums[i] + nums[j] + nums[m] == 0{
+                    let mut tmp =vec![];
+                    tmp.push( nums[i]);
+                    tmp.push(nums[j]);
+                    tmp.push(nums[m]);
+                    res.push(tmp);
+                }
+            }
+
+        }
+
+    }
+
+    res
+}
+fn main() {
+
+    let mut a1 =vec![0, 0, 0, 0];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+      let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+   
+}
+
+</code></pre></pre>
+<p>于是我们 很高兴的去leetcode 提交答案,但是果然 它 就超时了,毕竟现在 复杂度是$O^{3}$级别的。</p>
+<h1><a class="header" href="#排序--hashmap" id="排序--hashmap">排序 + HashMap</a></h1>
+<p>a + b + c = 0 我们使 b + c = d 那么 a  + d = 0 a = -d 能使 a 为 0 的 d 应该 只存在唯一一个。</p>
+<p>但是  能使 b + c = d 的可能有很多解。</p>
+<p>我们 循环是 先进行排序,把前一个和当前相同的 a 值过跳过, 因为 同一个 a 的出来的 是相同的 b 和 c 所以没有意义。 </p>
+<p>接下来 我们  满足 b + c = d 的解可能是有 多组的,同时 我们还要注意 一点 b + c  和 c + b 也是同一组解,所以遇到这种情况 我们也要过滤掉。我们还需要注意 当 a 被用掉后 b 和 c 也不能用 a 的值 ,</p>
+<p>因为本质上 a + b + c =0 可以设 a =b 这样 就可以变成 b + a  + c =0 这样 也是重复的解,只是位置换了。</p>
+<p>我们 把 先前的 2数之和稍微改动下,就能使用了。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+        let mut i = 0;
+        let mut nums = nums;
+        //排序
+        nums.sort();
+        let mut flag = None;
+        let mut res:Vec&lt;Vec&lt;i32&gt;&gt; =vec![];
+        while(i&lt;nums.len()){
+            if flag != None &amp;&amp; Some(nums[i]) == flag{i+=1;continue;}
+            flag = Some(nums[i]);
+            let mut map: HashMap&lt;i32, usize&gt; = HashMap::new();
+            let mut flag1:Option&lt;i32&gt; = None;
+            for (j, v) in nums.iter().enumerate() {
+                if j &lt; i +1 {continue;}
+                if flag1 != None &amp;&amp; Some(*v) == flag1 {continue;}
+                match map.get(v) {
+                    //匹配到 直接返回
+                    Some(&amp;index) =&gt; { res.push(vec![nums[i],nums[index], nums[j] ]);  flag1 = Some(*v); }
+                    //匹配不到 把当前数对应的解b = c -a  插入 value
+                    _ =&gt; { map.insert(-nums[i] - v, j ); }
+                }
+            }
+
+            i+=1;
+        }
+        res
+    }
+
+fn main() {
+
+    let mut a1 =vec![0, 0, 0, 0];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+      let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+   
+}
+</code></pre></pre>
+<img src="/Users/qiao/Desktop/myblog/src/image-20200626135325940.png" alt="image-20200626135325940" style="zoom:50%;" />
+<p>最终 我们 靠自前面实现的2树相加 实现了,但是 现在时间复杂度 还是 接近$O^n$ ,效率还不是最高。</p>
+<h1><a class="header" href="#排序--hashmap-1" id="排序--hashmap-1">排序 + HashMap</a></h1>
+<p>to be continuted!</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-
-                        
-                            <a rel="next" href="chapter_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+                        
+
                         
 
                         <div style="clear: both"></div>
@@ -190,11 +340,11 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-
-                
-                    <a rel="next" href="chapter_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+                
+
                 
             </nav>
 
