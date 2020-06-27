@@ -481,7 +481,7 @@ fn main() {
 <span class="boring">}
 </span></code></pre></pre>
 <h1><a class="header" href="#完整代码" id="完整代码">完整代码</a></h1>
-<pre><code>pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
 		//为了对付 leetcode 给的 比如像 [] [0] [1,2] 这样的没用数据
     if nums.len() &lt; 3 { return vec![];}
     let mut nums = nums;
@@ -529,7 +529,7 @@ fn main() {
     println!(&quot;{:?}&quot;,three_sum(a1));
 }
 
-</code></pre>
+</code></pre></pre>
 <img src="./image-20200627115118281.png" alt="image-20200627115118281" style="zoom:50%;" />
 <p>第一次运行的时候 只超越了 30% 多,但 第二次运行后超越了 73% 真是搞不懂,我们算法 已经写的非常简洁了,如果还有什么地方可以优化 我感觉 那就只能在 排序那里优化了。</p>
 
