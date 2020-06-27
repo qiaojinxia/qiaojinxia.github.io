@@ -400,7 +400,7 @@ impl Solution {
 <p>但是你可以看到 其实 第1组 和 第3组只是数的位置不一样 里面的数字是一样的,题目就是想说明这一点,所以 我们在对得出结果后还要对相同的组进行去重。</p>
 <p>a + b  + c = 0 是不是和 2数之和很相似,如果稍微改动下 变成 a + b = -c ,不就变成了2数之和了吗,那么 我们只要一层for 循环 来遍历 不同的c 就好了。 [-1, 0, 1, 2, -1, -4]  我们可以把 数组里面 的每一个数 当做 c 然后再去找 a 和 b。</p>
 <h1><a class="header" href="#暴力解法" id="暴力解法">暴力解法</a></h1>
-<p>时间复杂度：\(O_{(n^{3})}$  \(</p>
+<p>时间复杂度： $$O_{(n^{3})}$$</p>
 <p>空间复杂度：$$O(1)$$</p>
 <h4><a class="header" href="#暴力解法-很简单-但是我们要注意的点" id="暴力解法-很简单-但是我们要注意的点">暴力解法 很简单 但是我们要注意的点</a></h4>
 <ol>
@@ -538,7 +538,216 @@ fn main() {
 <img src="./image-20200626135325940.png" alt="image-20200626135325940" style="zoom:50%;" />
 <p>最终 我们 靠自前面实现的2树相加 实现了,但是 现在时间复杂度 还是 接近$O^n$ ,效率还不是最高。</p>
 <h1><a class="header" href="#排序--双指针" id="排序--双指针">排序 + 双指针</a></h1>
-<p>to be continuted!</p>
+<p>前面 我们实现了 通过hashMap 实现了2数之和,但 执行时间 还是有点慢,下面 尝试用双指针来看看会不会有更好的性能。</p>
+<p>首先明确的就是 双指针的思路 和 上面一种做法是一样的, a + b + c = 0 转换成 a + b = - c 然后定义2个指针,代表了 a 和 c 的取值,双指针的套路就是一般先要进行排序.然后 就是 就是一个while 左边小于右边就循环,</p>
+<p>双指针 我们分别 指向一个左边的最小的数,和一个右边最大的数。</p>
+<img src="./image-20200627102225337.png" alt="image-20200627102225337" style="zoom:50%;" />
+<p>从图上我们可以观察处,</p>
+<p>当a 指针 往 右移动  a + b 会变大</p>
+<p>当 b 指针 往 左移  a + b 会变小</p>
+<p>也就是说,如果 a + b &lt; -c 你就 移动 指针a,如果 a + b &gt; -c 你就移动 指针b,如果某一次移动 a 或 b后 正好等于了  - c,有点像 夹逼定理吧。</p>
+<p>那么可以说 我们找到了那个数,并且 我们不能让指针 碰在一起,也就是 指针a 的索引 &gt; 指针b 的索引,那么 如果我们不设限制的话 当指针 a 超过指针b 后 其实相当于 变成了 a = b 位置颠倒了, 会出现   1 + 3 和 3 + 1 这样本质是一样。</p>
+<p>另外要提的一点是,如果 排序后有重复的数字 比如上图的 -1 和 -1 这样 会出现重复的答案 我们需要作以下判断,分完了 开始编写代码把。</p>
+<h4><a class="header" href="#我们先-搭了一个基本的框架" id="我们先-搭了一个基本的框架">我们先 搭了一个基本的框架</a></h4>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+    let mut nums = nums;
+    //作下 排序
+    nums.sort();
+    //定义 c
+    for pointer_c in 0..nums.len(){
+        //定义指针a 要比 c 大
+        let mut pointer_a= pointer_c + 1;
+        //定义指针 b
+        let mut pointer_b =nums.len() -1;
+        //左边的指针小于右边的指针
+        while(pointer_a &lt; pointer_b ){
+
+        }
+
+
+    }
+    vec![]
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#接下来我们填充下内容" id="接下来我们填充下内容">接下来我们填充下内容</a></h4>
+<p>主要 判断下 a + b &gt; -c 和 a + b &lt; -c 或者 a + b = -c 的几种情况。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+    let mut nums = nums;
+    //作下 排序
+    nums.sort();
+    let mut res =vec![];
+    //定义 c
+    for pointer_c in 0..nums.len(){
+        //定义指针a 要比 c 大
+        let mut pointer_a= pointer_c+1;
+        //定义指针 b
+        let mut pointer_b =nums.len() -1;
+        //左边的指针小于右边的指针
+        while(pointer_a &lt; pointer_b ){
+            //如果 a + b &lt; -c 那么 往右移动a 指针 a + b 变大
+            if nums[pointer_a] +  nums[pointer_b] &lt; -nums[pointer_c] {
+                pointer_a += 1;
+            //如果 a + b &gt; -c 那么 往左移动b 指针 a + b 变小
+            }else if nums[pointer_a] +  nums[pointer_b] &gt;  -nums[pointer_c]{
+                pointer_b -= 1;
+             //如果 a + b = -c 找到了
+            }else if nums[pointer_a] +  nums[pointer_b] ==  -nums[pointer_c]{
+                res.push(vec![nums[pointer_a],nums[pointer_b],nums[pointer_c]]);
+								
+            }
+        }
+
+
+    }
+    res
+
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>在 实现的过程中 我遗漏了一点分析,当 a + b = -c 是  能使 a + b = -c  的 a + b 的解可能是有多个的。当我们找到第一组后,该怎么 移动指针 继续寻找 后面可能的解呢? 无非 要么移动 a 要么移动 b 要么 a 和 b 都移动,仔细一想 a 唯一对应 一个 b 反过来 b 也是,也就是 a找到了它唯一的伴侣 b也找到了它唯一的伴侣,那么 他们就没必要在找小三了。那么 只要 a 和 b 的指针 + 1 即可。</p>
+<img src="./image-20200627105930097.png" alt="image-20200627105930097" style="zoom:50%;" />
+<p>我们 还需要 注意 一点 就是 c 最大 能取到 的位置,上图 是c 能取到 的最大位置了 如果再往右 a 和b 的指针就要重合 了 那就没有意义了。所以 我们判断下 c 最大的index 是 len() -2  。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+    let mut nums = nums;
+    //作下 排序
+    nums.sort();
+    let mut res =vec![];
+    //定义 c  
+    for pointer_c in 0..nums.len() -2{ //c的最大界限 nums.len() -2 左闭右开
+        //定义指针a 要比 c 大
+        let mut pointer_a= pointer_c + 1;
+        //定义指针 b
+        let mut pointer_b =nums.len() -1;
+        //左边的指针小于右边的指针
+        while(pointer_a &lt; pointer_b ){
+            //如果 a + b &lt; -c 那么 右移动a 指针 a + b 变大
+            if nums[pointer_a] +  nums[pointer_b] &lt; -nums[pointer_c] {
+                pointer_a += 1;
+            //如果 a + b &gt; -c 那么 左移动b 指针 a + b 变小
+            }else if nums[pointer_a] +  nums[pointer_b] &gt;  -nums[pointer_c]{
+                pointer_b -= 1;
+             //如果 a + b = -c 找到了
+            }else if nums[pointer_a] +  nums[pointer_b] ==  -nums[pointer_c]{
+                res.push(vec![nums[pointer_a],nums[pointer_b],nums[pointer_c]]);
+                pointer_a += 1;
+                pointer_b -= 1;
+
+            }
+        }
+
+
+    }
+    res
+
+}
+
+
+fn main() {
+
+    let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+    // let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    // println!(&quot;{:?}&quot;,three_sum(a1));
+}
+
+</code></pre></pre>
+<p>运行下,上面代码来测试下吧!</p>
+<p>当你运行上面代码,发现问题了吧, 有重复的 [0,1,-1] 上面我们提过的,向量元素 如果重复了 比如  上面数组 -1 -1 就重复了, 那就要跳过。</p>
+<p>那么 我们 每次判断下,上一个元素是否相同,相同就跳过就好了 代码很简单,我们拿索引和上一个索引做下比较就好啦,但要注意 索引 0 要排除哦。</p>
+<blockquote>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>if pointer_c &gt;0 &amp;&amp; nums[pointer_c] == nums[pointer_c -1] { continue; }
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<p>到这里 我本以为 我的算法 就完美了 但是 。。。</p>
+<p>没错 在leetcode 中 </p>
+<blockquote>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>let mut a1 =vec![-2,0,0,2,2];
+<span class="boring">}
+</span></code></pre></pre>
+</blockquote>
+<p>我疏忽了 一点 就是 不只是 c 要判断 是否 相邻的有 重复跳过,  b 也需要 判断 是否相邻跳过。</p>
+<p>否则的话 当我们 确定了 c = -2 那么 a 和 b 在 [0,0,2,2]里面选择  那么 就会产生 2对 一样的,其实了解了 这个原因 和上面一样 每次  都记录下上一组的值,做下 判断就好了。</p>
+<img src="./image-20200627113954638.png" alt="image-20200627113954638" style="zoom:50%;" />
+<p>我们  每次找到一组的时候 把结果保存下,再下一次找到的时候对比下 值是否相同即可。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>else if nums[pointer_a] +  nums[pointer_b] ==  -nums[pointer_c]{
+    //比较上一组 的 a 是否和 这一次的相等 相等就跳过。
+    if tag1 == Some(nums[pointer_a])  { pointer_a += 1;pointer_b -= 1; continue;}
+    //每次保存下a的值
+    tag1 = Some(nums[pointer_a]);
+    ....
+
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h1><a class="header" href="#完整代码" id="完整代码">完整代码</a></h1>
+<pre><code>pub fn three_sum(nums: Vec&lt;i32&gt;) -&gt; Vec&lt;Vec&lt;i32&gt;&gt; {
+		//为了对付 leetcode 给的 比如像 [] [0] [1,2] 这样的没用数据
+    if nums.len() &lt; 3 { return vec![];}
+    let mut nums = nums;
+    //作下 排序
+    nums.sort();
+    let mut res =vec![];
+    //定义 c
+    for pointer_c in 0..nums.len() -2{
+        let mut tag1 = None;
+        if pointer_c &gt;0 &amp;&amp; nums[pointer_c] == nums[pointer_c -1] { continue; }
+        //定义指针a 要比 c 大
+        let mut pointer_a= pointer_c + 1;
+        //定义指针 b
+        let mut pointer_b =nums.len() -1;
+        //左边的指针小于右边的指针
+        while(pointer_a &lt; pointer_b ){
+            //如果 a + b &lt; -c 那么 右移动a 指针 a + b 变大
+            if nums[pointer_a] +  nums[pointer_b] &lt; -nums[pointer_c] {
+                pointer_a += 1;
+            //如果 a + b &gt; -c 那么 左移动b 指针 a + b 变小
+            }else if nums[pointer_a] +  nums[pointer_b] &gt;  -nums[pointer_c]{
+                pointer_b -= 1;
+             //如果 a + b = -c 找到了
+            }else if nums[pointer_a] +  nums[pointer_b] ==  -nums[pointer_c]{
+                if tag1 == Some(nums[pointer_a])  { pointer_a += 1;pointer_b -= 1; continue;}
+                tag1 = Some(nums[pointer_a]);
+                res.push(vec![nums[pointer_c],nums[pointer_a],nums[pointer_b]]);
+                pointer_a += 1;
+                pointer_b -= 1;
+
+            }
+        }
+
+
+    }
+    res
+
+}
+fn main() {
+    let mut a1 =vec![-2,0,0,2,2];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+    let mut a1 =vec![-1, 0, 1, 2, -1, -4];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+    let mut a1 =vec![0, 0, 0, 0, 0, 0];
+    println!(&quot;{:?}&quot;,three_sum(a1));
+}
+
+</code></pre>
+<img src="./image-20200627115118281.png" alt="image-20200627115118281" style="zoom:50%;" />
+<p>第一次运行的时候 只超越了 30% 多,但 第二次运行后超越了 73% 真是搞不懂,我们算法 已经写的非常简洁了,如果还有什么地方可以优化 我感觉 那就只能在 排序那里优化了。</p>
 
                     </main>
 
