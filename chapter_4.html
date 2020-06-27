@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Leetcode 第9题 - 回文数(easy) - leetcodebyrust</title>
+        <title>Leetcode 第7题 - 反转整数(medium) - leetcodebyrust</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,138 +150,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#leetcode-第9题---回文数easy" id="leetcode-第9题---回文数easy">Leetcode 第9题 - 回文数(easy)</a></h1>
-<p>题目:判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+                        <h1><a class="header" href="#leetcode-第7题---反转整数easy" id="leetcode-第7题---反转整数easy">Leetcode 第7题 - 反转整数(easy)</a></h1>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
 <p><strong>示例 1:</strong></p>
-<pre><code>输入: 121
-输出: true
-</code></pre>
+<blockquote>
+<p>输入: 123
+输出: 321</p>
+</blockquote>
 <p><strong>示例 2:</strong></p>
-<pre><code>输入: -121
-输出: false
-解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
-</code></pre>
+<blockquote>
+<p>输入: -123
+输出: -321</p>
+</blockquote>
 <p><strong>示例 3:</strong></p>
-<pre><code>输入: 10
-输出: false
-解释: 从右向左读, 为 01 。因此它不是一个回文数。
-</code></pre>
-<h2><a class="header" href="#编码实现思路" id="编码实现思路">编码实现思路</a></h2>
-<p>Leetocde模板代码:</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
-</span><span class="boring">fn main() {
-</span>impl Solution {
-    pub fn is_palindrome(x: i32) -&gt; bool {
-        
-
+<blockquote>
+<p>输入: 120
+输出: 21</p>
+</blockquote>
+<h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
+<p>反转整数很简单 ,我们要一次拆解 各个位数 然后每次乘以 10 把上一次加上就好了,如果是负数 我们先把 符号 截取 反转后加上。</p>
+<p>我们需要注意的是,32位的数的取值范围是  [−2^31, 2^31 − 1],如果反转后超出 这个值返回0 。</p>
+<h4><a class="header" href="#example" id="example">example:</a></h4>
+<p>给个 1024 </p>
+<p>第一次 a = 1024 % 10  * 10 = 4 *10 =40 然后更新下 1024 /10  = 102</p>
+<p>第二次  a  = (a +  102 % 10)  * 10 = 420  然后更新下 102 /10  = 10</p>
+<p>第三次 a = （a + 10 % 10) *10 = 4200  然后更新下 10 /10  = 1</p>
+<p>第四次   a = （a + 10 % 1) *10 = 4201 * 10 结束条件   再除以 10 小于 1了解结束了。</p>
+<p>我们 要注意 在转换过程中,如果数字超出 范围就返回 0 ,为此 我们在 需要把数字转换成 i64 去判断下大小。</p>
+<h2><a class="header" href="#全部代码" id="全部代码">全部代码</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn reverse(x: i32) -&gt; i32 {
+    let mut tmp;
+    if(x &lt; 0 ){
+        tmp = -x;
+    }else{
+        tmp = x;
     }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h3><a class="header" href="#实现思路" id="实现思路">实现思路</a></h3>
-<p>这里我们先要熟悉,一个基本操作 一个数数 取个位只需要取余( % 10) </p>
-<blockquote>
-<p>101 % 10 = 1</p>
-</blockquote>
-<p>如果要把每一位 取出来 就需要 循环 /10  %10</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn takenum(x: i32) {
-   let mut tmp = x;
-    while tmp &gt;1 {
-        print!(&quot;{} &quot;,tmp%10);
-        tmp = tmp /10;
-    }
-    println!();
 
-}
-
-fn main() {
-    takenum(543);
-}
-</code></pre></pre>
-<p>leetcode给定的是 一个 i32数字,我们的思路是这样的 把 一个数字 比如 123 -&gt; 反转 成 321  如果判断反转后的数字,和原数字相等 那么 就是回文数字。</p>
-<blockquote>
-<p>example : 121 -&gt;</p>
-<p>tmp1 = 取个位1 *  10 = 10</p>
-<p>tmp1 += 取十位2 * 10  = (tmp1 + 2) * 10 = (10 +2) * 10 =120</p>
-<p>tmp1 += 取百位1 * 10 =(tmp1 + 1) * 10 = (120 +2) * 10 =1210 </p>
-<p>最后 tmp1 /10 = 121 </p>
-</blockquote>
-<h3><a class="header" href="#反转一个整数" id="反转一个整数">反转一个整数</a></h3>
-<blockquote>
-<p>example : 123 -&gt; 321 121-&gt;121 </p>
-</blockquote>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn reverse(x: i32) -&gt; i32{
-    let mut tmp = x;
     let mut tmp1 = 0;
-    while (tmp &gt;= 1) {
-            // 123 第一次  temp1 30 tmp 12 -&gt; 第二次 320 1 -&gt; 第三次 3210 0.1 小于1 跳出循环 这样就完成了颠倒数字
-        tmp1 = (tmp1 + tmp % 10 )* 10;
-        tmp = tmp / 10;
-    }
-    tmp1 /10
-
-}
-
-fn main() {
-
-    println!(&quot;{}&quot;,reverse(123));
-}
-</code></pre></pre>
-<h3><a class="header" href="#回文数字完整代码" id="回文数字完整代码">回文数字完整代码</a></h3>
-<p>有了上面的反转,只需要判断下 反转后的代码是否与原文一致即可,但是下面代码 还对 某些特殊的数字 比如负数、能被10整除的数、0~10的数字 直接做出判断、做了一些特殊条件的处理。</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn is_palindrome(x: i32) -&gt; bool {
-    // [0,10)之间的数 都为 true
-    if(x &lt; 10 &amp;&amp; x &gt;=0){return true;}
-    //如果 -开头的 和 100、1000 这样的直接排除
-    if(x &lt; 0 || x % 10 ==0 ){ return false }
-    let mut tmp = x;
-    let mut tmp1 = 0;
-    while (tmp &gt;= 1) {
-        //将数字颠倒  123 先取出 3* 10 在把tmp更新成 12
-       //这里加 if 是因为 如果是10位数 最后一次个位数再乘以10 -&gt; 11位数 就超出 i32 的最大值了 就会报错!
-        if  tmp &lt; 10 { tmp1 = (tmp1 + tmp % 10 )}
-        else{
-            // 123 第一次  temp1 30 tmp 12 -&gt; 第二次 320 1 -&gt; 第三次 3210 0.1 小于1 跳出循环 这样就完成了颠倒数字
-            tmp1 = (tmp1 + tmp % 10 )* 10;
+    while (tmp &gt;= 1){
+    		//转换成 i64 去判断是否溢出
+        let mut tmpcalc = tmp1 as i64 + (tmp % 10) as i64 ;
+        //这里当 分解到最后一位数的时候 就不要再成10了
+        if tmp &gt;= 10 {
+            tmpcalc*= 10;
         }
+        //判断下 是否溢出
+        if  tmpcalc &gt;  2147483648 ||  tmpcalc &lt;  -2147483648 { return 0;}
+        tmp1 = tmpcalc as i32;
         tmp = tmp / 10;
     }
-    //123 -&gt; 321 不相等 121 -&gt; 121 相等
-    if tmp1 == x {
-        return true;
+    //判断 x 是正数还是负数
+    if x &lt;0{
+        -tmp1
+    }else{
+        tmp1
     }
-    return false;
 }
 
-//测试代码
 fn main() {
-    println!(&quot;{}&quot;,is_palindrome(123));
-    println!(&quot;{}&quot;,is_palindrome(121));
-    println!(&quot;{}&quot;,is_palindrome(1000000001));
-
+    println!(&quot;{}&quot;,reverse(102));
+ 		println!(&quot;{}&quot;,reverse(90809890));
+ 		println!(&quot;{}&quot;,reverse(9080123129890));
 }
-
 </code></pre></pre>
-<h3><a class="header" href="#提交结果" id="提交结果">提交结果：</a></h3>
-<p><img src="./image-20200623143110412.png" alt="image-20200623143110412" /></p>
-<p>ps:点击编辑器右上角 图标可运行代码哦!</p>
-<img src="./image-20200623170053603.png" alt="image-20200623170053603" style="zoom:55%;" />
-
+<img src="./image-20200627230138093.png" alt="image-20200627230138093" style="zoom:50%;" />
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -291,15 +233,11 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
