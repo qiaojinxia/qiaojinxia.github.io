@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Leetcode 第4题 - 寻找两个正序数组的中位数(hard) - leetcodebyrust</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html" class="active"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">leetcodebyrust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#leetcode-第4题---寻找两个正序数组的中位数hard" id="leetcode-第4题---寻找两个正序数组的中位数hard">Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></h1>
+<p>给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。</p>
+<p>请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。</p>
+<p>你可以假设 nums1 和 nums2 不会同时为空。</p>
+<p><strong>示例 1:</strong></p>
+<blockquote>
+<p>nums1 = [1, 3]
+nums2 = [2]</p>
+<p>则中位数是 2.0</p>
+</blockquote>
+<p><strong>示例 2:</strong></p>
+<blockquote>
+<p>nums1 = [1, 2]
+nums2 = [3, 4]</p>
+<p>则中位数是 (2 + 3)/2 = 2.5</p>
+</blockquote>
+<h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
+<p>最简单的方法 就是先合并 ,然后找到 中位数取出。</p>
+<p>这里的知识点是小学数学我们学过的 取一组数的中位数,如果是 奇数个 假设数组长度 为 m ,那么 就是 <strong>ceil</strong>(m / 2)  ceil 是向上取整 比如 arr[<strong>ceil</strong>(9/2)] = arr[5] ,如果是偶数 那么 就是 取第<strong>ceil</strong>(m/2) 和 第<strong>ceil</strong>(m /2 + 1) 相加 </p>
+<p>比如 arr[ ceil(10 /2 )] +arr[(ceil(10 /2) + 1)] =arr[5] + arr[6] 。</p>
+<p>那么 我们需要做的 就是 把2个组数 在合并后每个数对应合并后的索引给找出来,这样 通过计算出来的 中位数的索引就可以确定 中位数了。</p>
+<h1><a class="header" href="#双指针归并" id="双指针归并">双指针归并</a></h1>
+<p>时间复杂度：O (m+ n) </p>
+<p>空间复杂度：O (1)</p>
+<p>中位数的计算,如果数组是 奇数个 直接取 中间的数    [ 1,2 ,3] -&gt; 2</p>
+<p>如果数组是偶数个 取中间的 2个数相加除以 2  [1,2,3,4] -&gt; 2 + 3 / 2 =1.5</p>
+<img src="./image-20200628123321636.png" alt="image-20200628123321636" style="zoom:50%;" />
+<p>那么 由于数组原先就是有序的,我们 可以使用归并 定义2根指针 然后依次 比大小,然后不停的往后取。</p>
+<img src="./image-20200628152315427.png" alt="image-20200628152315427" style="zoom:50%;" />
+<pre><pre class="playpen"><code class="language-rust editable">pub fn find_median_sorted_arrays(nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64 {
+    let mut pointer_a = 0;
+    let mut pointer_b = 0;
+    loop {
+        // 这个判断取的是公共长度的 部分 a 如果 长度为 5 b如果长度为 4 那么 这个判断里面 是 前 4个数归并
+        if  pointer_a &gt; nums1.len() ||  pointer_b &gt; nums2.len()  {
+            if nums1[pointer_a] &lt; nums2[pointer_b]   { //如果 指针a的值 &lt;  指针b的值 指针 a 往后移动一个位置
+                println!(&quot;{}&quot;,nums1[pointer_a]);
+                pointer_a +=1;
+            }else if nums1[pointer_a] &gt; nums2[pointer_b]{  //如果 指针a的值 &gt;  指针b的值 指针 b 往后移动一个位置
+                println!(&quot;{}&quot;,nums2[pointer_b]);
+                pointer_b +=1;
+            }else if nums1[pointer_a] == nums2[pointer_b]{//如果两个数 相等 2根指针 都往后移动1个位置
+                println!(&quot;{}&quot;,nums1[pointer_b]);
+                pointer_a +=1;
+                pointer_b +=1;
+            }
+        }else if pointer_a &lt; nums1.len(){ //当 b指针的 长度 耗尽 了 我们只需要移动 a 指针就好了
+            println!(&quot;{}&quot;,nums1[pointer_a]);
+            pointer_a +=1;
+        }else if pointer_b &lt; nums2.len(){ // 当 a指针的 长度耗尽了 ,接下来 我们只需要移动b 指针了
+            println!(&quot;{}&quot;,nums2[pointer_b]);
+            pointer_b +=1;
+        }else{
+            //上述条件都不满足,跳出循环
+            break;
+        }
+
+    }
+    1  as f64
+}
+
+fn main() {
+    let mut a1 =vec![1,3,5,12,16];
+    let mut a2 =vec![2,4,6,7,9];
+    find_median_sorted_arrays(a1,a2);
+
+}
+</code></pre></pre>
+<p>上面的 代码 我们久通过指针 指向了 2个数组,然后比较大小 然后移动指针,代码 比较简单 就是 定义 双指针 比大小 然后 移动指针。 要注意的是 由于2个数组长度不一样,当一个数组长度到头了,那么就移动剩下的数组指针到结束为止。</p>
+<p>上面其实就实现了 将 2个有序数组进行归并的过程,实际上我们 没有定义一个数组 来存放 归并好的值,因为不需要这么做 我们直接通过 2根指针的 位置相加 计算出 每个数在 归并后数组的索引,如果 等于2个数组合并后中位数的索引 那么就找到了这个值。</p>
+<p>但我们在编码的过程中,我们计算中位数索引的值需要注意,一点：</p>
+<ol>
+<li>我们对给定的2个数组长度相加是奇数和 偶数 做一下判断,如果是奇数 直接取  最中间的一个数,如果是 偶数要取到 中间的 2个数相加 再 除以 2。</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn find_median_sorted_arrays(nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64 {
+		// 这个判断 是为了 处理一些 比如 [] ,[1] 这样糟糕的数据,偷懒 就直接在这处理掉吧!
+    if (nums1.len() ==1 &amp;&amp; nums2.len() == 0) {
+        return  nums1[0] as f64;
+    }
+    if(nums1.len() ==0 &amp;&amp; nums2.len() == 1) {
+        return  nums2[0] as f64;
+    }
+    let mut pointer_a = 0;
+    let mut pointer_b = 0;
+    //flag 用于记录最后一次移动的 是 pointer_a 或者 是 pointer_b 或者都移动了
+    let mut flag = 0;
+    let mut lastnum =0;
+    loop {
+        // 这个判断取的是公共长度的 部分 a 如果 长度为 5 b如果长度为 4 那么 这个判断里面 是 前 4个数归并
+        if  pointer_a &lt; nums1.len() &amp;&amp;  pointer_b &lt; nums2.len()  {
+            if nums1[pointer_a] &lt; nums2[pointer_b]   { //如果 指针a的值 &lt;  指针b的值 指针 a 往后移动一个位置
+                flag = 0;
+            }else if nums1[pointer_a] &gt; nums2[pointer_b]{  //如果 指针a的值 &gt;  指针b的值 指针 b 往后移动一个位
+                flag = 1;
+            }else if nums1[pointer_a] == nums2[pointer_b]{//如果两个数 相等 2根指针 都往后移动1个位置
+                flag = 2;
+            }
+        }else if pointer_a &lt; nums1.len(){ //当 b指针的 长度 耗尽 了 我们只需要移动 a 指针就好了
+            flag = 0;
+        }else if pointer_b &lt; nums2.len(){ // 当 a指针的 长度耗尽了 ,接下来 我们只需要移动b 指针了
+            flag = 1;
+        }else{
+            //上述条件都不满足,跳出循环
+            break;
+        }
+        //上面的所有代码 主要负责 循环移动a b 的指针,直到数组的末尾,需要 注意的 是 数组 总是有长有短 如果一边的指针 移动到末尾了 剩下的 全部移动 另一边的指针
+
+
+        //如果 指针 指向了 中位数
+        if  ((nums1.len() + nums2.len() -2 ) / 2) + 1 == pointer_a + pointer_b {
+            //如果 数组1 + 数组2 是奇数个
+            if  (nums1.len() + nums2.len()) % 2  != 0  {
+                //处理 指针 a 移动了的情况
+                if flag == 0{
+                    return nums1[pointer_a] as f64;
+                }else {
+                    //如果指针 b 或者 2个指针都移动 的 情况
+                    return nums2[pointer_b] as f64;
+                }
+
+            }else{//如果 数组1 + 数组2 偶数个
+
+                //如果 是 偶数个 我们 需要 记录上一个数 和当前的 数相加 / 2
+                if flag == 0{
+                    return (nums1[pointer_a] as f64 +  lastnum as f64) / 2.00;
+                }else {
+                    return (nums2[pointer_b] as f64 +  lastnum as f64) / 2.00;
+                }
+            }
+         //处理 pointer_a 和 【pointer_b 相等 都往后 移动 2步,那么 pointer_a + pointer_b == 数组1长度 + 数组2长度 -2 (从0索引开始 所以 -1 -1 = -2) /2 + 1
+        }else if (nums1.len() + nums2.len() -2 ) / 2 + 1 &lt; pointer_a + pointer_b {
+            break;
+        }else{ //如果 不是中位数
+            if flag ==0{
+                lastnum =  nums1[pointer_a];
+                //指针 a 往后移动一步
+                pointer_a += 1;
+            }else if flag ==1{
+                lastnum =  nums2[pointer_b];
+                //指针 b 往后移动一步
+                pointer_b += 1;
+            }else{
+                lastnum =  nums1[pointer_a];
+                //指针 a b 分别往后移动一步
+                pointer_a += 1;
+                pointer_b += 1;
+            }
+
+        }
+
+
+
+    }
+   return lastnum as f64;
+}
+
+fn main() {
+
+    let mut a1 =vec![1,2];
+    let mut a2 =vec![3,4];
+    println!(&quot;{}&quot;,find_median_sorted_arrays(a1,a2));
+
+}
+
+</code></pre></pre>
+<img src="./image-20200628175204548.png" alt="image-20200628175204548" style="zoom:50%;" />
+<p>第一次 执行用了 8ms,后面执行 就变成 4ms了,不知道什么原因。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="chapter_4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="chapter_4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
