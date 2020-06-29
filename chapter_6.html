@@ -173,7 +173,7 @@
 <p>如果 我们第一次去访问 index  = 0   访问到 3</p>
 <p>第二次访问 index =1 访问到 2 是目标值 remove </p>
 <p>当我们 第三次要访问 的时候 index = 2 但是 由素组被更新过了 变成了  [3,2,3] 访问 2 就直接变成了 3 了 跳过了 2 </p>
-<p>所以 当我们 定义 一个 计数器 每当 remove 时 + 1 ,  每次访问的索引变成  index - remove  这样 第三次访问变成了  1 这样 就解决了 这个问题.</p>
+<p>所以 当我们 定义 一个 计数器 每当 remove 时 count+ 1 ,  每次访问的索引变成  index - count  这样 第三次访问变成了  1 这样 就解决了 这个问题.</p>
 <pre><pre class="playpen"><code class="language-rust editable">pub fn remove_element(nums: &amp;mut Vec&lt;i32&gt;, val: i32) -&gt; i32 {
     let mut count:i32 = 0;
     for i in  0..nums.len(){
