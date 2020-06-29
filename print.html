@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1013,7 +1013,50 @@ fn main() {
 <p>a指针 我们也每次移动 剩余范围的一半,采取这样的二分法。</p>
 <p>这里我们 还要注意 如果 a 数组 里面找不到中位数,那么 我们就需要 直接在 b数组里面找中位数。</p>
 <p>另外要注意的是 我们 希望是 在数组 a 里面找到 中位数,那么 要求 数组a的长度 &gt;= 数组b 的长度,所以我们 在一开始判断下谁的长度长 就是数组a 最下数组交换。</p>
+<h1><a class="header" href="#leetcode-第27题---移除元素easy" id="leetcode-第27题---移除元素easy">Leetcode 第27题 - 移除元素(easy)</a></h1>
+<p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p><strong>示例 1:</strong></p>
+<blockquote>
+<p>给定 nums = [3,2,2,3], val = 3,</p>
+<p>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<p><strong>示例 2:</strong></p>
+<blockquote>
+<p>给定 nums = [0,1,2,2,3,0,4,2], val = 2,</p>
+<p>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。</p>
+<p>注意这五个元素可为任意顺序。</p>
+<p>你不需要考虑数组中超出新长度后面的元素</p>
+</blockquote>
+<h1><a class="header" href="#解题思路-3" id="解题思路-3">解题思路</a></h1>
+<p>这里 其实很简单 我们 判断元素 是否为 要删除的元素 ,再使用rust 的remove 就好了,但是这里要注意 如果 我们通过索引取访问 到数组,那么当你remove 完了 后 数组里面 元素数 就少了 一个 下一次循环 就要减1, 那么 我们 每次 remove 后都需要计数 一下,然后 把 index 减去 这个计数 得出来的是 我们 删除后下一个元素的位置。</p>
+<p>比如 [3,2,2,3] 我们要删除 2</p>
+<p>如果 我们第一次去访问 index  = 0   访问到 3</p>
+<p>第二次访问 index =1 访问到 2 是目标值 remove </p>
+<p>当我们 第三次要访问 的时候 index = 2 但是 由素组被更新过了 变成了  [3,2,3] 访问 2 就直接变成了 3 了 跳过了 2 </p>
+<p>所以 当我们 定义 一个 计数器 每当 remove 时 + 1 ,  每次访问的索引变成  index - remove  这样 第三次访问变成了  1 这样 就解决了 这个问题.</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn remove_element(nums: &amp;mut Vec&lt;i32&gt;, val: i32) -&gt; i32 {
+    let mut count:i32 = 0;
+    for i in  0..nums.len(){
+        if nums[i - count as usize] == val {
+            nums.remove(i - count as usize);
+            count +=1;
+        }
+    }
+    nums.len() as i32
+}
+fn main() {
 
+    let mut a1 =vec![3];
+    let mut a2 =vec![3,2,2,3];
+    println!(&quot;{}&quot;,remove_element(a2.as_mut(), 2));
+    println!(&quot;{:?}&quot;,a2);
+}
+
+</code></pre></pre>
+<img src="./image-20200629231857041.png" alt="image-20200629231857041" style="zoom:50%;" />
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
