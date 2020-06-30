@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,6 +167,8 @@
 2020-06.28 -- 寻找两个正序数组的中位数(hard)</li>
 <li><input disabled="" type="checkbox" checked=""/>
 2020-06-29 -- 移除元素(easy)</li>
+<li><input disabled="" type="checkbox" checked=""/>
+2020-06-30 -- 实现 strStr()</li>
 </ul>
 <p>微信打赏 : </p>
 <img src="./lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509.jpg" alt="lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509" style="zoom:33%;" />
@@ -1013,6 +1015,63 @@ fn main() {
 <p>a指针 我们也每次移动 剩余范围的一半,采取这样的二分法。</p>
 <p>这里我们 还要注意 如果 a 数组 里面找不到中位数,那么 我们就需要 直接在 b数组里面找中位数。</p>
 <p>另外要注意的是 我们 希望是 在数组 a 里面找到 中位数,那么 要求 数组a的长度 &gt;= 数组b 的长度,所以我们 在一开始判断下谁的长度长 就是数组a 最下数组交换。</p>
+<p>用这种方法,要处理很多 边界条件,太烦了 写了 70% 放弃。 </p>
+<h2><a class="header" href="#找第-k-个数" id="找第-k-个数">找第 k 个数</a></h2>
+<p>条件 给定数组 a 长度为 m,数组b 长度 为 n</p>
+<p>那么 数组 a 和数组 b 的中位数 为 (m + n  + 1) /  2  为什么 + 1 呢?  主要是向上取整floor。如果不加 1 那么就是向下取整。 Floor(1.x)  =2  , ceil(1.x) = 1。</p>
+<h3><a class="header" href="#二分法介绍" id="二分法介绍">二分法介绍</a></h3>
+<p>如果给定一个 从小到大的数组,那么怎么快速查找一个数,一般使用二分法。二分法 是不断缩小搜索范围的一种方法。 </p>
+<p>第一次 搜索范围一半 (m + n  + 1) /  2 一半分为 左边一半 和 右边一半</p>
+<p><img src="./image-20200630154101244.png" alt="image-20200630154101244" /></p>
+<p>二分法 是 每次都除以 2 这样 然后 收敛在 0点, 5 -&gt; 2 -&gt; 1  -&gt; 0。</p>
+<p>我们 如果从给定的数组m 中去取第k个数,那么 它的前 面的 k -1 个数必然是小于等于 第k个数的。</p>
+<p>那么 我们如果在 第二数组也找到第 k_ 个数,也是同样的结果,那么当我们 把第 数组 a 的 第k 个数和数组 b 的第k个数作比较,那么 必然有一方 大于或等于 另一方, 假设 数组 a 的 k为k_1 数组b 的 k为 k_2,假设 k_1 &gt;= k_2,那么 我们可以得出  2k -1 个数 不等于 第 2k 个数.</p>
+<p><img src="./image-20200630160248239.png" alt="image-20200630160248239" /></p>
+<p>那么 就排除前 2k -1 个数 了, 如果 k_1 要想成为 第 2k 个数,要满足 条件  k_2 的 第 k_2 + 1个数 &gt; 第 k_1个数,</p>
+<p>否则的话 第 k 个数。如上图 假设 47 为 第 2k个数,他前面有 2k -1个数比它小。</p>
+<img src="./image-20200630160935344.png" alt="image-20200630160935344" style="zoom:50%;" />
+<p>如上图 我们可以看到,当数组 b 中 第 k + 1 个数 比 47 小了 那么 k就会变成 第 k + 1 个了,就好像 有人问你 跑过了 倒数第二名 你是第几名一样,  由于 43 比 47小所以 就替换了 47的位置 此时 43 变成了 第 k 位数。</p>
+<h1><a class="header" href="#总结-1" id="总结-1">总结:</a></h1>
+<p>从上面的 推论 我们可以得出几点结论：我们 找到 第 2k 个数的位置,</p>
+<img src="./image-20200630211211783.png" alt="image-20200630211211783" style="zoom:50%;" />
+<p>比如 如果 给定 m 为 3 n 为 4 的数组， 那么 取中位数为 2k = (3 + 4 + 1) / 2 = 4</p>
+<p>也就是 m、n  中 第 k = 2 个位置。  然后 比较下 谁大 那么 它就有可能是 第 2k 个数,因为在它前面有 比它小的 2k -1 个数,</p>
+<img src="./image-20200630211431656.png" alt="image-20200630211431656" style="zoom:50%;" />
+<p>你看 上图 想不想 一群人在追逐跑步, 如果 第 2k 个数 想要 保持 第2k名,那么 它的速度 一定 要 比它 后面的块 比前面的慢,假设 45号 前面的要等到 和 45号 同一起跑线 才开始跑的话, 我们已经知道了 45号 所在那一组 在它前面的速度 一定比它 快,那么 问题 就在 另一组了 如果另一组 里面 有比它 速度慢的话 最终 会被 45号 追过去,那么 第 2k 名就变成被追过去的那一名了,那么 问题来了 你被 第 2k 名超过了,你是第几名 ? 所以 如上图 35号 比 45号 要慢 那么 它会被 45 号第 2k 名 追过去 ,结果就是它变成了 第 2k 名。</p>
+<img src="./image-20200630213026977.png" alt="image-20200630213026977" style="zoom:50%;" />
+<p>所以 我们只要 定义 2根指针 分别指向 2个数组,刚开始 它们都指向 第 k个数,然后 比较下 谁大 谁大 谁暂时就是第 2k 个数,接下来 第 2k 个数 和 另一组 的 k + 1个数 如果 你比我小 果断 你就变成 2k个数。</p>
+<p>哈哈 其实上面的 分析 有一点问题, 那就是 不是另一组 的 k + 1 个数 小于第 2k 个数 它就变成 第2k个数, 如果把 上图 14 变成 37,那么实际上  37 很快会取代 35 作为 2k个数。</p>
+<img src="./image-20200630214342091.png" alt="image-20200630214342091" style="zoom:50%;" />
+<img src="./image-20200630214901849.png" alt="image-20200630214901849" style="zoom:50%;" />
+<p>实际上 我们数组 本生 没有变化,变化的是 指针的位置。 45 是 刚开始 2k 的位置,变化的 主要是 另一个数组的位置,它 要比 45小,同时要比  14 位置处大。 那么 奇数个 中位数 就是 35 ,偶数个 中位数 就是 2根指针的相加 除以 2,</p>
+<p>但是 我们还要处理 一种情况 , 如果 上面一组 都比 14 小的情况 那么 </p>
+<pre><pre class="playpen"><code class="language-rust editable">pub  fn find_median_sorted_arrays(nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64{
+    let mut nums1 = nums1;
+    let mut nums2 = nums2;
+    if nums1.len() &gt; nums2.len(){
+        let tmp = nums1;
+        nums1 = nums2;
+        nums2 = tmp;
+    }
+    let mid_num = (nums1.len() + nums2.len() + 1) / 2 -1;
+    //k 为小的数
+    let mut pointer_a = nums1.len() -1;
+
+    let mut pointer_b = 0;
+    let k = mid_num / 2 ;
+
+    if pointer_a &lt; k{
+        pointer_b = mid_num - pointer_a -1;
+    }else{
+        pointer_a = k;
+        pointer_b = mid_num - k -1 ;
+    }
+
+   
+    1.0
+
+}
+</code></pre></pre>
 <h1><a class="header" href="#leetcode-第27题---移除元素easy" id="leetcode-第27题---移除元素easy">Leetcode 第27题 - 移除元素(easy)</a></h1>
 <p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
 <p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
@@ -1056,7 +1115,45 @@ fn main() {
 }
 
 </code></pre></pre>
-<img src="./image-20200629231857041.png" alt="image-20200629231857041" style="zoom:50%;" />
+<img src="./image-20200629231857041.png" alt="image-20200629231857041" style="zoom:50%;" /><h1><a class="header" href="#leetcode-第27题----strstr-函数easy" id="leetcode-第27题----strstr-函数easy">Leetcode 第27题 -  strStr() 函数(easy)</a></h1>
+<p>实现 strStr() 函数。</p>
+<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
+<p><strong>示例 1:</strong></p>
+<blockquote>
+<p>输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
+输出: 2</p>
+</blockquote>
+<p><strong>示例 2:</strong></p>
+<blockquote>
+<p>输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
+输出: -1</p>
+</blockquote>
+<h1><a class="header" href="#解题思路-4" id="解题思路-4">解题思路</a></h1>
+<p>定义双指针,分别指向 haystack 字符 和 needle 字符串</p>
+<p>如果 遇到 一样的 字符 指针 needle 指针 + 1 ,如果指针不一样 needle指针置 0;</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub fn str_str(haystack: String, needle: String) -&gt; i32 {
+    if needle.len() == 0 {return 0};
+    let mut pointer_b = 0;
+    for i in 0..haystack.len(){
+        if  needle.as_bytes()[pointer_b] == haystack.as_bytes()[i] {
+            pointer_b += 1;
+            if pointer_b == needle.len()  {
+                return i as i32 - pointer_b as i32 + 1;
+            }
+        }else{
+            pointer_b =0;
+        }
+
+    }
+    return  -1;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>未完成....</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
