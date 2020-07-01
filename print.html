@@ -1166,7 +1166,8 @@ fn main() {
 <img src="./image-20200701185444874.png" alt="image-20200701185444874" style="zoom:50%;" />
 <img src="./image-20200701185613169.png" alt="image-20200701185613169" style="zoom:50%;" />
 <p>参考资料：https://www.bilibili.com/video/BV1Ys411d7yh?t=710</p>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn get_next(needle: &amp;String) -&gt; Vec&lt;i32&gt; {
+<pre><pre class="playpen"><code class="language-rust editable">use std::borrow::Borrow;
+pub fn get_next(needle: &amp;String) -&gt; Vec&lt;i32&gt; {
     let mut tmpvec = Vec::with_capacity(needle.len());
     tmpvec.push(0);
     let mut j = 0;
