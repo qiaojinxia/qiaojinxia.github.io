@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -168,7 +168,7 @@
 <li><input disabled="" type="checkbox" checked=""/>
 2020-06-29 -- 移除元素(easy)</li>
 <li><input disabled="" type="checkbox" checked=""/>
-2020-06-30 -- 实现 strStr(表面上easy)</li>
+2020-06-30 -- 实现 strStr(表面上easy kmp算法)</li>
 <li><input disabled="" type="checkbox" checked=""/>
 2020-07-01 -- 删除链表的倒数第N个节点 (medium)</li>
 </ul>
@@ -1229,119 +1229,54 @@ fn main() {
 }
 
 </code></pre></pre>
-<img src="./image-20200701193612961.png" alt="image-20200701193612961" style="zoom:50%;" /><h1><a class="header" href="#leetcode-第27题----strstr-函数easy-1" id="leetcode-第27题----strstr-函数easy-1">Leetcode 第27题 -  strStr() 函数(easy)</a></h1>
-<p>实现 strStr() 函数。</p>
-<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
-<p><strong>示例 1:</strong></p>
+<img src="./image-20200701193612961.png" alt="image-20200701193612961" style="zoom:50%;" /><h1><a class="header" href="#leetcode-第19题----a-hrefhttpsleetcode-cncomproblemsremove-nth-node-from-end-of-list删除链表的倒数第n个节点aeasy" id="leetcode-第19题----a-hrefhttpsleetcode-cncomproblemsremove-nth-node-from-end-of-list删除链表的倒数第n个节点aeasy">Leetcode 第19题 -  <a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">删除链表的倒数第N个节点</a>(easy)</a></h1>
+<p>给定一个链表，删除链表的倒数第 <em>n</em> 个节点，并且返回链表的头结点。</p>
+<p><strong>示例：</strong></p>
 <blockquote>
-<p>输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
-输出: 2</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
 </blockquote>
-<p><strong>示例 2:</strong></p>
-<blockquote>
-<p>输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
-输出: -1</p>
-</blockquote>
+<p><strong>说明：</strong></p>
+<p>给定的 <em>n</em> 保证是有效的。</p>
+<p><strong>进阶：</strong></p>
+<p>你能尝试使用一趟扫描实现吗？</p>
 <h1><a class="header" href="#解题思路-5" id="解题思路-5">解题思路</a></h1>
-<p>这题可以使用 暴力解法,2层循环 一层 指向 一个字符 内层去逐一 的匹配 字符串。</p>
-<p>时间复杂度 是$ O(n^2)$</p>
-<p>空间复杂度 $O(1)$</p>
-<p>我们 想要尝试另一种做法,KMP算法。</p>
-<p>时间复杂度 $O(N)$</p>
-<p>空间复杂度 $O(M)$</p>
-<h1><a class="header" href="#kmp算法-1" id="kmp算法-1">KMP算法</a></h1>
-<p>kmp 算法 代码 非常简洁,紧凑但是 要理解起来还是有一定难度的。</p>
-<p>kmp算法分为2步</p>
-<ol>
-<li>
-<p>首先要构建 一个 next数组。</p>
-</li>
-<li>
-<p>根据 next 数组直接匹配。</p>
-</li>
-</ol>
-<p>首先 讲这个算法 之前 要明白 普通的双指针为什么 不可以匹配。</p>
-<img src="./image-20200701182051646.png" alt="image-20200701182051646" style="zoom:50%;" />
-<p>我们 可以看到 如果定义 2个指针(索引),从0 开始 指向 2个 数组,不相等 i就往后移,当相等 时 i和 j 都往后移</p>
-<p>直到 i 和 j 指向的值不同 那么 就匹配结束。这种思维 是很普遍的 看起来很美好。</p>
-<p>如上的数组 如果这么找 的话 , 当  i =  4 处 结束匹配 把 j 重置为 0,i 往后 开始下一轮匹配,这样很明显 后边还剩下 </p>
-<p>ba 匹配不到 bcba,但是事实上 如果我们忽略掉 i = 1 处的匹配,从 i = 3 处匹配 完全就能匹配的到。我们为了便于讨论 把这个问题先起个名字 叫做 &quot;模式重复错误&quot;.</p>
-<p>因为 第一次 的匹配导致后面不能完全匹配到字符, 首先 我们思考下 匹配的基本条件至少是开头要一样吧, 那么 也就是说 匹配的字符串 有一个特点，那就是 有和 开头那个字符 一样重复的 字符。</p>
-<p>打个比方   abc 我们 可以把 </p>
-<p>所有的子集 称为 {a,b,c,ab,bc,abc}  a模式 b模式 c模式 以此类推。</p>
-<p>我们 把 所有 a 开头的 起个昵称 称为 开机模式群 {abcx}</p>
-<p>我们 判定 某个字符都是从首字母开始的 也就是说 只要是 &quot;开机模式群&quot; 那么 我们就可以记一次 匹配字符串。</p>
-<p>在 abc 中 开机模式群 只有一种组合 ,所以我们只需要 一次判断 。</p>
-<p>但如果改成 aba 呢  里面 有2个 a 就有可能 {abax,ax} 就变成了 2种 组合,那么 就要 两次 匹配。</p>
-<p>但是当我们 处在 一次匹配模式中,没法中途退出 就会出现 上面的 &quot;模式重复错误&quot; 问题。</p>
-<p>那么 解决这个问题,的关键 是 如果我们知道 匹配字符串 包含 几种 &quot;开机模式群&quot; 的组合,那么 我们匹配错误的时候解出 一次匹配模式 然后切换到 另一种 &quot;开机模式群&quot; 状态 就可以 解决这个问题。</p>
-<p>那怎么 切换呢,其实 {ax} 是 {abax}的子集,它们 之间 索引相差 值就好了.</p>
-<p>而 next 表就是类似这样一个东西 ,让你从 &quot;开机模式群&quot;一种状态 切换到另一种 &quot;开机模式群&quot; 状态.</p>
-<img src="./image-20200701185444874.png" alt="image-20200701185444874" style="zoom:50%;" />
-<img src="./image-20200701185613169.png" alt="image-20200701185613169" style="zoom:50%;" />
-<p>参考资料：https://www.bilibili.com/video/BV1Ys411d7yh?t=710</p>
-<pre><pre class="playpen"><code class="language-rust editable">use std::borrow::Borrow;
-pub fn get_next(needle: &amp;String) -&gt; Vec&lt;i32&gt; {
-    let mut tmpvec = Vec::with_capacity(needle.len());
-    tmpvec.push(0);
-    let mut j = 0;
-    let mut i = 1;
-    for _ in 1..needle.len() {
-        if needle.as_bytes()[i] != needle.as_bytes()[j] {
-            while needle.as_bytes()[i] != needle.as_bytes()[j] &amp;&amp; j &gt;= 1 {
-                j = tmpvec[j - 1];
-            }
-        }
-        if needle.as_bytes()[i] == needle.as_bytes()[j] {
-            j += 1;
-        }
-        tmpvec.push(j);
-        i += 1;
+<p>这道题的难点是怎么找到倒数 第 n个节点,就好像 你如果不把每一颗盒子里面的糖都吃一遍,那么 你就没法确切的知道 有多少颗 酸的多少颗是甜的。 我们要知道 倒数第n个数 那必须要知道 最后一个数,才能相对的确定第 倒数第 n 个数。</p>
+<p>那么 一种可行方法是 先遍历一遍链表 计算出链表有多少个值,然后可以确定 最后第 n个数的位置 其中一种方案 是 我们递归调用 然后从后向前回溯,就能找到 这也是 rust 里面相对便于实现的一种方法。</p>
+<p>在rust 里面 操作链表 比较麻烦,我们 通常用 take() 来吧当前链表 拿到手,take 会把 当前链表的 替换为为nil 然后我们就能获取链表的所有权了。</p>
+<h1><a class="header" href="#递归栈-回溯" id="递归栈-回溯">递归栈 回溯</a></h1>
+<p>我们 先递归到底,然后到底之后给定的 n 就可以 减去 1,这样 从底部开始 减,那么 减到 第 n 个就是 0了,然后 我们 直接返回向上返回 它的 next 而不返回当前节点,这样就可以实现删除啦。</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::borrow::BorrowMut;
+impl Solution {
+    pub fn remove_nth_from_end(head: Option&lt;Box&lt;ListNode&gt;&gt;, n: i32) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
+        let mut n = n;
+        Solution::remove_nth_from_end_recursion(head,n.borrow_mut())
     }
+    pub fn remove_nth_from_end_recursion(head: Option&lt;Box&lt;ListNode&gt;&gt;, n: &amp;mut i32   ) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
+        let mut linlist: Option&lt;Box&lt;ListNode&gt;&gt;  = head;
+        match linlist.take() {
+            None =&gt; {None},
+            Some(mut x) =&gt; {
+                let next = Solution::remove_nth_from_end_recursion(x.next.take(),n);
+                *n -=1;
+                println!(&quot;{}&quot;,*n);
+                if *n == 0 {
+                    return next	;
+                }else{
+                    x.next = next;
+                    return Some(x);
+                }
+            },
 
-    let mut next: Vec&lt;i32&gt; = Vec::with_capacity(needle.len());
-    next.push(-1);
-    for i in 0..tmpvec.len() - 1 {
-        next.push(tmpvec[i] as i32);
-    }
-    next
-}
-
-pub fn str_str(haystack: String, needle: String) -&gt; i32 {
-    if needle.len() == 0 {
-        return 0;
-    }
-    let next = get_next(needle.borrow());
-    let mut i = 0;
-    let mut j = 0;
-    while i &lt; haystack.len() {
-        if haystack.as_bytes()[i] == needle.as_bytes()[j] {
-            j += 1;
-            if j == needle.len() {
-                return (i - j + 1) as i32;
-            }
-            i += 1;
-        } else {
-            if j != 0 {
-                j = next[j] as usize;
-            }else{
-                i += 1;
-            }
         }
 
     }
-    return -1;
-}
-
-fn main() {
-    let str1 = String::from(&quot;mississippi&quot;);
-    let str2 = String::from(&quot;issip&quot;);
-    println!(&quot;{}&quot;, str_str(str1, str2));
 
 }
 
 </code></pre></pre>
-<img src="./image-20200701193612961.png" alt="image-20200701193612961" style="zoom:50%;" />
+<img src="./image-20200701233310512.png" alt="image-20200701233310512" style="zoom:50%;" />
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

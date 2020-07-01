@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Leetcode 第7题 - 反转整数(medium) - leetcodebyrust</title>
+        <title>Leetcode 第19题 -  删除链表的倒数第N个节点 - leetcodebyrust</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html" class="active"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,84 +150,64 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#leetcode-第7题---反转整数easy" id="leetcode-第7题---反转整数easy">Leetcode 第7题 - 反转整数(easy)</a></h1>
-<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
-<p><strong>示例 1:</strong></p>
+                        <h1><a class="header" href="#leetcode-第19题----a-hrefhttpsleetcode-cncomproblemsremove-nth-node-from-end-of-list删除链表的倒数第n个节点aeasy" id="leetcode-第19题----a-hrefhttpsleetcode-cncomproblemsremove-nth-node-from-end-of-list删除链表的倒数第n个节点aeasy">Leetcode 第19题 -  <a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">删除链表的倒数第N个节点</a>(easy)</a></h1>
+<p>给定一个链表，删除链表的倒数第 <em>n</em> 个节点，并且返回链表的头结点。</p>
+<p><strong>示例：</strong></p>
 <blockquote>
-<p>输入: 123
-输出: 321</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</p>
+<p>当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</p>
 </blockquote>
-<p><strong>示例 2:</strong></p>
-<blockquote>
-<p>输入: -123
-输出: -321</p>
-</blockquote>
-<p><strong>示例 3:</strong></p>
-<blockquote>
-<p>输入: 120
-输出: 21</p>
-</blockquote>
+<p><strong>说明：</strong></p>
+<p>给定的 <em>n</em> 保证是有效的。</p>
+<p><strong>进阶：</strong></p>
+<p>你能尝试使用一趟扫描实现吗？</p>
 <h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
-<p>反转整数很简单 ,我们要一次拆解 各个位数 然后每次乘以 10 把上一次加上就好了,如果是负数 我们先把 符号 截取 反转后加上。</p>
-<p>我们需要注意的是,32位的数的取值范围是  [−2^31, 2^31 − 1],如果反转后超出 这个值返回0 。</p>
-<h4><a class="header" href="#example" id="example">example:</a></h4>
-<p>给个  b = 1024   a = 0</p>
-<p>第一次 a = (a +  b % 10)  * 10 = 4 *10 =40 然后更新下 b = 1024 /10  = 102</p>
-<p>第二次 a = (a +  b % 10)  * 10 = (40 + 102 % 10) * 10 = 420  然后更新下 b = 102 /10  = 10</p>
-<p>第三次 a = (a + b % 10) *10 = (420 + 10 % 10) * 10 = 4200  然后更新下 b = 10 /10  = 1</p>
-<p>第四次 a = (a + b % 1) *10 =  (4200 + 1 % 10) * 10 = 4201 结束条件  b=1/10 =0.1  小于 1 条件结束</p>
-<p>我们 要注意 在转换过程中,如果数字超出 范围就返回 0 ,为此 我们在 需要把数字转换成 i64 去判断下大小。</p>
-<h2><a class="header" href="#全部代码" id="全部代码">全部代码</a></h2>
-<pre><pre class="playpen"><code class="language-rust editable">pub fn reverse(x: i32) -&gt; i32 {
-    let mut tmp;
-    if(x &lt; 0 ){
-        tmp = -x;
-    }else{
-        tmp = x;
+<p>这道题的难点是怎么找到倒数 第 n个节点,就好像 你如果不把每一颗盒子里面的糖都吃一遍,那么 你就没法确切的知道 有多少颗 酸的多少颗是甜的。 我们要知道 倒数第n个数 那必须要知道 最后一个数,才能相对的确定第 倒数第 n 个数。</p>
+<p>那么 一种可行方法是 先遍历一遍链表 计算出链表有多少个值,然后可以确定 最后第 n个数的位置 其中一种方案 是 我们递归调用 然后从后向前回溯,就能找到 这也是 rust 里面相对便于实现的一种方法。</p>
+<p>在rust 里面 操作链表 比较麻烦,我们 通常用 take() 来吧当前链表 拿到手,take 会把 当前链表的 替换为为nil 然后我们就能获取链表的所有权了。</p>
+<h1><a class="header" href="#递归栈-回溯" id="递归栈-回溯">递归栈 回溯</a></h1>
+<p>我们 先递归到底,然后到底之后给定的 n 就可以 减去 1,这样 从底部开始 减,那么 减到 第 n 个就是 0了,然后 我们 直接返回向上返回 它的 next 而不返回当前节点,这样就可以实现删除啦。</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::borrow::BorrowMut;
+impl Solution {
+    pub fn remove_nth_from_end(head: Option&lt;Box&lt;ListNode&gt;&gt;, n: i32) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
+        let mut n = n;
+        Solution::remove_nth_from_end_recursion(head,n.borrow_mut())
     }
+    pub fn remove_nth_from_end_recursion(head: Option&lt;Box&lt;ListNode&gt;&gt;, n: &amp;mut i32   ) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
+        let mut linlist: Option&lt;Box&lt;ListNode&gt;&gt;  = head;
+        match linlist.take() {
+            None =&gt; {None},
+            Some(mut x) =&gt; {
+                let next = Solution::remove_nth_from_end_recursion(x.next.take(),n);
+                *n -=1;
+                println!(&quot;{}&quot;,*n);
+                if *n == 0 {
+                    return next	;
+                }else{
+                    x.next = next;
+                    return Some(x);
+                }
+            },
 
-    let mut tmp1 = 0;
-    while (tmp &gt;= 1){
-    		//转换成 i64 去判断是否溢出
-        let mut tmpcalc = tmp1 as i64 + (tmp % 10) as i64 ;
-        //这里当 分解到最后一位数的时候 就不要再成10了
-        if tmp &gt;= 10 {
-            tmpcalc*= 10;
         }
-        //判断下 是否溢出
-        if  tmpcalc &gt;  2147483648 ||  tmpcalc &lt;  -2147483648 { return 0;}
-        tmp1 = tmpcalc as i32;
-        tmp = tmp / 10;
+
     }
-    //判断 x 是正数还是负数
-    if x &lt;0{
-        -tmp1
-    }else{
-        tmp1
-    }
+
 }
 
-fn main() {
-    println!(&quot;{}&quot;,reverse(102));
- 		println!(&quot;{}&quot;,reverse(9080980));
- 		println!(&quot;{}&quot;,reverse(90801290));
-}
 </code></pre></pre>
-<img src="./image-20200627230138093.png" alt="image-20200627230138093" style="zoom:50%;" />
+<img src="./image-20200701233310512.png" alt="image-20200701233310512" style="zoom:50%;" />
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="chapter_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_7.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="chapter_5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -237,15 +217,11 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="chapter_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_7.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="chapter_5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
