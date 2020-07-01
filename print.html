@@ -1246,6 +1246,7 @@ fn main() {
 <p>在rust 里面 操作链表 比较麻烦,我们 通常用 take() 来吧当前链表 拿到手,take 会把 当前链表的 替换为为nil 然后我们就能获取链表的所有权了。</p>
 <h1><a class="header" href="#递归栈-回溯" id="递归栈-回溯">递归栈 回溯</a></h1>
 <p>我们 先递归到底,然后到底之后给定的 n 就可以 减去 1,这样 从底部开始 减,那么 减到 第 n 个就是 0了,然后 我们 直接返回向上返回 它的 next 而不返回当前节点,这样就可以实现删除啦。</p>
+<p>要对 n 操作 所以我们单独写一个函数,把 n 改成引用类型。</p>
 <pre><pre class="playpen"><code class="language-rust editable">use std::borrow::BorrowMut;
 impl Solution {
     pub fn remove_nth_from_end(head: Option&lt;Box&lt;ListNode&gt;&gt;, n: i32) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
@@ -1257,12 +1258,16 @@ impl Solution {
         match linlist.take() {
             None =&gt; {None},
             Some(mut x) =&gt; {
+            		// 递归栈
                 let next = Solution::remove_nth_from_end_recursion(x.next.take(),n);
+                //上面 会递归到底 然后我们在这每次-1 来计算倒数n个
                 *n -=1;
                 println!(&quot;{}&quot;,*n);
+                //如果 当前节点是倒数第 n 个,那么 我们 返回这个节点的next 节点 跳过当前节点,相当于删除了当前节点
                 if *n == 0 {
                     return next	;
                 }else{
+                //否则一般情况 把 next 和 当前节点 链接在一起返回
                     x.next = next;
                     return Some(x);
                 }
