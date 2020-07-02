@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">6.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">7.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">9.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">10.</strong> Leetcode 第26题 -  删除链表的倒数第N个节点</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,6 +171,8 @@
 2020-06-30 -- 实现 strStr(表面上easy kmp算法)</li>
 <li><input disabled="" type="checkbox" checked=""/>
 2020-07-01 -- 删除链表的倒数第N个节点 (medium)</li>
+<li><input disabled="" type="checkbox" checked=""/>
+2020-07-02 -- 删除排序数组中的重复项 (easy)</li>
 </ul>
 <p>微信打赏 : </p>
 <img src="./lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509.jpg" alt="lbcf231650c77d851dd2be5403e9605a3-s-m213a3a4852edb6f5848e58fa3c667509" style="zoom:33%;" />
@@ -1389,7 +1391,57 @@ impl Solution {
 
 </code></pre></pre>
 <img src="./image-20200701233310512.png" alt="image-20200701233310512" style="zoom:50%;" />
-
+<h1><a class="header" href="#leetcode-第19题---a-hrefhttpsleetcode-cncomproblemsremove-duplicates-from-sorted-array删除排序数组中的重复项a" id="leetcode-第19题---a-hrefhttpsleetcode-cncomproblemsremove-duplicates-from-sorted-array删除排序数组中的重复项a">Leetcode 第19题 - <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">删除排序数组中的重复项</a></a></h1>
+<p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
+<p><strong>示例 1:</strong></p>
+<blockquote>
+<p>给定数组 nums = [1,1,2], </p>
+<p>函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 </p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<p><strong>示例 2:</strong></p>
+<blockquote>
+<p>给定 nums = [0,0,1,1,1,2,2,3,3,4],</p>
+<p>函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</p>
+<p>你不需要考虑数组中超出新长度后面的元素。</p>
+</blockquote>
+<p><strong>说明:</strong></p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<blockquote>
+<p>// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝
+int len = removeDuplicates(nums);</p>
+<p>// 在函数里修改输入数组对于调用者是可见的。
+// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。
+for (int i = 0; i &lt; len; i++) {
+print(nums[i]);
+}</p>
+</blockquote>
+<h1><a class="header" href="#解题思路-6" id="解题思路-6">解题思路</a></h1>
+<p>如果普通的方法 我们就,new 一个 新的数组,但是题目 有要求 我们 不能有额外的空间复杂度,那么 我们只能边 遍历 边修改.有了这个想法 我们得思考,那么 要一边 遍历 一边改,那么 首先想到 可以有2根指针,一根在前一根在后修改，</p>
+<p>那么 指针 a  =0 指针 b =1。</p>
+<p>那么 问题 来了,是 指针 a 去修改b还是指针b修改指针a呢?</p>
+<p>假设指针 a 修改指针b的数字,那么我们需要判定重复数字,如果指针b的值 == 指针 a 的值,那么 就算一样 a 把 b 修改成什么呢? a 可是孤零零的 它是零号位前面没有东西,隔壁是 b ,难道 去 b 后面借东西修改b,那么 还不如 b 取修改 a 的值。</p>
+<p>核心逻辑 ：如果 a.val = b.val  a.val = (b + 1).val 同时我们 还需要判断下 b + 1是不是 大于 数组的长度 - 1 ,大于就结束。</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>pub fn remove_duplicates(nums: &amp;mut Vec&lt;i32&gt;) -&gt; i32 {
+    if nums.len() == 0 { return 0;}
+    let  mut i =0;
+    for j in 1..nums.len(){
+        if nums[j] != nums[i] {
+            i+=1;
+            nums[i] = nums[j];
+        }
+    }
+    return (i + 1) as i32;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<img src="./image-20200703004202937.png" alt="image-20200703004202937" style="zoom:50%;" />
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
