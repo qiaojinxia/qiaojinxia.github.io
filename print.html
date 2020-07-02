@@ -1033,21 +1033,83 @@ fn main() {
 <p>否则的话 第 k 个数。如上图 假设 47 为 第 2k个数,他前面有 2k -1个数比它小。</p>
 <img src="./image-20200630160935344.png" alt="image-20200630160935344" style="zoom:50%;" />
 <p>如上图 我们可以看到,当数组 b 中 第 k + 1 个数 比 47 小了 那么 k就会变成 第 k + 1 个了,就好像 有人问你 跑过了 倒数第二名 你是第几名一样,  由于 43 比 47小所以 就替换了 47的位置 此时 43 变成了 第 k 位数。</p>
-<h1><a class="header" href="#总结-1" id="总结-1">总结:</a></h1>
-<p>从上面的 推论 我们可以得出几点结论：我们 找到 第 2k 个数的位置,</p>
-<img src="./image-20200630211211783.png" alt="image-20200630211211783" style="zoom:50%;" />
-<p>比如 如果 给定 m 为 3 n 为 4 的数组， 那么 取中位数为 2k = (3 + 4 + 1) / 2 = 4</p>
-<p>也就是 m、n  中 第 k = 2 个位置。  然后 比较下 谁大 那么 它就有可能是 第 2k 个数,因为在它前面有 比它小的 2k -1 个数,</p>
-<img src="./image-20200630211431656.png" alt="image-20200630211431656" style="zoom:50%;" />
-<p>你看 上图 想不想 一群人在追逐跑步, 如果 第 2k 个数 想要 保持 第2k名,那么 它的速度 一定 要 比它 后面的块 比前面的慢,假设 45号 前面的要等到 和 45号 同一起跑线 才开始跑的话, 我们已经知道了 45号 所在那一组 在它前面的速度 一定比它 快,那么 问题 就在 另一组了 如果另一组 里面 有比它 速度慢的话 最终 会被 45号 追过去,那么 第 2k 名就变成被追过去的那一名了,那么 问题来了 你被 第 2k 名超过了,你是第几名 ? 所以 如上图 35号 比 45号 要慢 那么 它会被 45 号第 2k 名 追过去 ,结果就是它变成了 第 2k 名。</p>
-<img src="./image-20200630213026977.png" alt="image-20200630213026977" style="zoom:50%;" />
-<p>所以 我们只要 定义 2根指针 分别指向 2个数组,刚开始 它们都指向 第 k个数,然后 比较下 谁大 谁大 谁暂时就是第 2k 个数,接下来 第 2k 个数 和 另一组 的 k + 1个数 如果 你比我小 果断 你就变成 2k个数。</p>
-<p>哈哈 其实上面的 分析 有一点问题, 那就是 不是另一组 的 k + 1 个数 小于第 2k 个数 它就变成 第2k个数, 如果把 上图 14 变成 37,那么实际上  37 很快会取代 35 作为 2k个数。</p>
-<img src="./image-20200630214342091.png" alt="image-20200630214342091" style="zoom:50%;" />
-<img src="./image-20200630214901849.png" alt="image-20200630214901849" style="zoom:50%;" />
-<p>实际上 我们数组 本生 没有变化,变化的是 指针的位置。 45 是 刚开始 2k 的位置,变化的 主要是 另一个数组的位置,它 要比 45小,同时要比  14 位置处大。 那么 奇数个 中位数 就是 35 ,偶数个 中位数 就是 2根指针的相加 除以 2,</p>
-<p>但是 我们还要处理 一种情况 , 如果 上面一组 都比 14 小的情况 那么 </p>
+<h1><a class="header" href="#代码实战" id="代码实战">代码实战</a></h1>
+<p>光说不练假把式,我们 可以用上面的思维 边完成代码 边继续推理,能边学习边及时得到反馈 也能让你更有兴趣对问题更加深入的研究。</p>
+<h1><a class="header" href="#1-首先-我们-要定义-2k-是多少-我们-一般-把-2k-取为-中位数-的位置" id="1-首先-我们-要定义-2k-是多少-我们-一般-把-2k-取为-中位数-的位置">1. 首先 我们 要定义 2k 是多少, 我们 一般 把 2k 取为 中位数 的位置?</a></h1>
+<p>假设 2个数组 m 长为 3 n长为 2 ,按照中位数的计算 应该取 (3 + 2 + 1)  / 2  = 3</p>
+<p>那么 我们可以在 m 里 取 2,那在 n里取到 3 -2 = 1(注意实际索引 从 0开始 要 -1 但是为了方便了解这里 使用从1开始)</p>
+<p>但是 如果 m 是个只有为 1的数组 那怎么办呢? 所以 我们在 取值的时候可以采用 将中位数 3/2 = 1 然后我们再判断下,如果 数组索引 比 1大 k_m取 1 比1小 k_m 取数组的长度。</p>
+<p>然后k_n +  k_m  =3 , k_n取剩下部分。</p>
 <pre><pre class="playpen"><code class="language-rust editable">pub  fn find_median_sorted_arrays(nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64{
+  let mut nums1 = nums1;
+    let mut nums2 = nums2;
+    if nums1.len() &gt; nums2.len(){
+        let tmp = nums1;
+        nums1 = nums2;
+        nums2 = tmp;
+    }
+    let k_2 = (nums1.len() + nums2.len() + 1) / 2 -1;
+    //k 为小的数
+    let mut k_m = nums1.len() -1;
+
+    let mut k_n = 0;
+    let k = k_2 / 2 ;
+
+    if k_m &lt; k{
+        k_n = k_2 - k_m -1;
+    }else{
+        k_m = k;
+        k_n = k_2 - k -1 ;
+    }
+
+    println!(&quot;{},{}&quot;,pointer_a +1,pointer_b +1);
+ 		
+
+}
+fn main() {
+    let m = vec![7,12,21,43,56,78];
+    let n = vec![3,16,47,73,63];
+    find_median_sorted_arrays(m,n);
+}
+</code></pre></pre>
+<p>上面代码  k_2 变量名 就是 2k 个数的索引 也就是中位数索引,由于变量起名规则,下文 我们一致 用第K_2 个数 来替代 第2k 个数</p>
+<h1><a class="header" href="#2如何找到中位数" id="2如何找到中位数">2.如何找到中位数?</a></h1>
+<p>有了上面的划分 我们 就要来证明,如何找到中位数的位置呢.</p>
+<p>我们知道 数组是从大到小有序的,并且上面的算法 把数组 划分成了这样</p>
+<img src="./image-20200702113003988.png" alt="image-20200702113003988" style="zoom:50%;" />
+<p>那么 我们首先尝试去 比较 k_m 和 k_n 的大小 谁大 我就认为 设就是暂时的第k_2个数,</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>//谁大 谁就是 k_2 个数
+if  nums1[pointer_a] &gt; nums2[pointer_b]{
+    println!(&quot;{} &quot;,nums1[pointer_a]);
+}else{
+    println!(&quot;{} &quot;,nums2[pointer_b]);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>那么 有了k_2 个数,我们 就要到中位数了吗? 其实还有挺长的路要走。</p>
+<img src="./image-20200702113956361.png" alt="image-20200702113956361" style="zoom:50%;" />
+<p>现在 呢 47是 第 k_2个数,但是 因为它前面有 k_2 - 1个数,那么想要维持住这种关系,那么 我们就要保证 </p>
+<p>k_m  和 k_n   后面的数全部 要 大于 47, 由于 已知 是给定数组是升序排列的,就有 k_n + 1  &gt; k_n</p>
+<p>那么 k_m 后面的数,就决定这 k_n 是不是 第 k_2 个数的关键。</p>
+<p>此时 就会有两种情况：</p>
+<ol>
+<li>k_m + 1 &lt;  k_n 如果是 这种情况,那么 k_m + 1 将会插到 k_n 前面,使得 k_n 变成第 k_2 + 1 个数,而 k_m + 1变 成 第 k_2 个数。又 由于 k_m + 1 &lt; k_m + 2 那么,k_m + 1 前面不可能再插入其他数了,所以k_m + 1 就变成了k_2。 当然 在实际编码过程中,我们还要注意 k_m + 1 是否存在。</li>
+<li>k_m + 1 &gt;= k_n 这种情况,k_m + 1 不能插入到k_n 前面所以不会影响 k_n ,所以不需要做什么.</li>
+</ol>
+<p>那么 分别讨论了上面2中问题,是不是就能 覆盖了所有问题了呢?</p>
+<p>第一种情况 我们 还需要小心一点,如下图:</p>
+<img src="./image-20200702120139880.png" alt="image-20200702120139880" style="zoom:50%;" />
+<p>如果 k_m + 1 比 k_n小 故而插入到k_n前面 那么 k_m + 1 就一定 是紧挨着 47的吗?如果 k_m + 1 比前面的 某 1个数还小呢?</p>
+<p><img src="./image-20200702123241629.png" alt="image-20200702123241629" /></p>
+<p>如上,由于 k_m+1 比 k_n -1 个数还小,那么 他就会在 k_n -1 前面,那么 此时 k_n -1 才是 第 k_2 个数。</p>
+<p>如果 k_m + 2 个数 还是 比 k_n -1 个数小,那么 k_m + 2 就会变成 第k_2个数,也就是说 只要不断插入在 前 k_2个数 </p>
+<p>之前 那么新插入的 k_m + x 就有可能是 第 k_2个数,我们 要做的 首先是 保持 k_m + k_n = k_2 的关系,使得 中位数必然在这 k_m 和k_n 附近,然后 判断 如果 k_m + 1 &gt;= k_n 就结束,如果 小于 我们 还需要 判断 k_n -1 是不是 大于 k_m + 1 如果 不是的话  我们把 k_n -1  = k_n循环这个过程。	</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub  fn find_median_sorted_arrays(nums1: Vec&lt;i32&gt;, nums2: Vec&lt;i32&gt;) -&gt; f64{
+		//偷懒 处理 都是 1个的情况
+    let iseve = (nums1.len() + nums2.len()) % 2 == 0;
     let mut nums1 = nums1;
     let mut nums2 = nums2;
     if nums1.len() &gt; nums2.len(){
@@ -1055,26 +1117,72 @@ fn main() {
         nums1 = nums2;
         nums2 = tmp;
     }
-    let mid_num = (nums1.len() + nums2.len() + 1) / 2 -1;
-    //k 为小的数
-    let mut pointer_a = nums1.len() -1;
-
-    let mut pointer_b = 0;
-    let k = mid_num / 2 ;
-
-    if pointer_a &lt; k{
-        pointer_b = mid_num - pointer_a -1;
-    }else{
-        pointer_a = k;
-        pointer_b = mid_num - k -1 ;
+    // 偷懒 解决数组有长度 一个数组 没长度
+    if nums1.len() == 0  {
+        if iseve {
+            return  (nums2[(nums2.len())/2 -1] as f64 + nums2[(nums2.len() + 1)/2 ] as f64 )/ 2.00;
+        }else{
+            return nums2[(nums2.len() + 1)/2 -1] as f64
+        }
     }
 
-   
-    1.0
+    let k_2 = (nums1.len() + nums2.len() + 1) / 2 -1;
+    //k 为小的数
+    let mut k_m = nums1.len() -1;
+
+    let mut k_n = 0;
+    let k = k_2 / 2 ;
+
+    if nums1.len() + nums2.len() != 2 {
+        if k_m &lt; k{
+            k_n = k_2 - k_m -1;
+        }else{
+            k_m = k;
+            k_n = k_2 - k -1 ;
+        }
+    }
+    //交换数组 
+    if nums1[k_m] &lt; nums2[k_n] {
+        let tmp = nums1;
+        nums1 = nums2;
+        nums2 = tmp;
+
+        let tmp = k_n;
+        k_n = k_m;
+        k_m = tmp;
+
+    }
+    //这里 push 几个值 是为了 处理边界的情况
+    nums1.insert(0,std::i32::MIN);
+    nums2.push(std::i32::MAX);
+    nums1.push(std::i32::MAX);
+    k_m +=1;
+
+    //以下是 核心代码 上面预处理 没什么技术含量
+    while k_n + 1 &lt; nums2.len() -1 &amp;&amp; nums1[k_m] &gt; nums2[k_n + 1]{
+        if k_m == 0 {
+            k_n +=1;
+        }else{
+            k_m -= 1;
+            k_n +=1;
+        }
+    }
+    if iseve {
+        return (max(nums1[k_m],nums2[k_n]) as f64 +min(nums1[k_m +1],nums2[k_n +1]) as f64 )/ 2.00;
+    }else{
+        return max(nums1[k_m],nums2[k_n]) as f64;
+    }
+    -1.0
 
 }
+fn main() {
+
+    let m = vec! [1,2] ;
+    let n = vec! [3,4] ;
+    println!(&quot;{}&quot;,find_median_sorted_arrays(m,n));
+}
 </code></pre></pre>
-<h1><a class="header" href="#leetcode-第27题---移除元素easy" id="leetcode-第27题---移除元素easy">Leetcode 第27题 - 移除元素(easy)</a></h1>
+<img src="./image-20200702225920240.png" alt="image-20200702225920240" style="zoom:50%;" /><h1><a class="header" href="#leetcode-第27题---移除元素easy" id="leetcode-第27题---移除元素easy">Leetcode 第27题 - 移除元素(easy)</a></h1>
 <p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
 <p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
 <p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
@@ -1163,7 +1271,7 @@ fn main() {
 <p>但如果改成 aba 呢  里面 有2个 a 就有可能 {abax,ax} 就变成了 2种 组合,那么 就要 两次 匹配。</p>
 <p>但是当我们 处在 一次匹配模式中,没法中途退出 就会出现 上面的 &quot;模式重复错误&quot; 问题。</p>
 <p>那么 解决这个问题,的关键 是 如果我们知道 匹配字符串 包含 几种 &quot;开机模式群&quot; 的组合,那么 我们匹配错误的时候解出 一次匹配模式 然后切换到 另一种 &quot;开机模式群&quot; 状态 就可以 解决这个问题。</p>
-<p>那怎么 切换呢,其实 {ax} 是 {abax}的子集,它们 之间 索引相差 值就好了.</p>
+<p>那怎么 切换呢,其实 {ax} 是 {abax}的子集,它们 之间 索引相差 值就好了,PMT表其实 就是计算 每个状态 切换 索引之间切相差的值。</p>
 <p>而 next 表就是类似这样一个东西 ,让你从 &quot;开机模式群&quot;一种状态 切换到另一种 &quot;开机模式群&quot; 状态.</p>
 <img src="./image-20200701185444874.png" alt="image-20200701185444874" style="zoom:50%;" />
 <img src="./image-20200701185613169.png" alt="image-20200701185613169" style="zoom:50%;" />
