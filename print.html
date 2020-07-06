@@ -179,8 +179,10 @@
 2020-07-04 --  最长有效括号(hard)</li>
 <li><input disabled="" type="checkbox" checked=""/>
 2020-07-05 第70题 爬楼梯(easy)</li>
-<li><input disabled="" type="checkbox" checked=""/>
+<li><input disabled="" type="checkbox"/>
 2020-07-06 第198题 打家劫舍(easy)</li>
+<li><input disabled="" type="checkbox" checked=""/>
+2020-07-07 第120题 三角形最小路径和(medium)</li>
 </ul>
 <h1><a class="header" href="#分类整理" id="分类整理">分类整理</a></h1>
 <p><a href="./classify.html">各题型整理</a></p>
@@ -205,19 +207,21 @@
 <h4><a class="header" href="#题目" id="题目">题目</a></h4>
 <ul>
 <li>
-<h2><a class="header" href="#入门题目" id="入门题目">入门题目:</a></h2>
+<p>入门题目:</p>
+<ul>
+<li><a href="./chapter_12.html">Leetcode 第70题 -  [爬楼梯]</a></li>
+<li><a href="./chapter_13.html">Leetcode 第198题 -  [打家劫舍]</a></li>
+</ul>
 </li>
 <li>
 <h2><a class="header" href="#进阶题目" id="进阶题目">进阶题目:</a></h2>
 </li>
 </ul>
+<p>​	</p>
 <h1><a class="header" href="#双指针" id="双指针">双指针</a></h1>
 <ul>
 <li>
 <p>入门题目:</p>
-<ul>
-<li><a href="./chapter_12.html">Leetcode 第70题 -  [爬楼梯]</a></li>
-</ul>
 </li>
 <li>
 <h2><a class="header" href="#进阶题目-1" id="进阶题目-1">进阶题目</a></h2>
@@ -1680,7 +1684,7 @@ fn main() {
 </code></pre></pre>
 <img src="./img/image-20200706155203491.png" alt="image-20200706155203491" style="zoom:50%;" />
 <h1><a class="header" href="#动态规划思想" id="动态规划思想">动态规划思想</a></h1>
-<p>上面的 递归在改进后,最后我们使用一个数组去记录每个 计算过的值,这就是动态规划的思想了,一个问题 由更小规模 子问题去 组合 找到每个子问题 的最优解 合在一起就是 这个问题的最优解。</p>
+<p>上面的 递归在改进后,最后我们使用一个数组去记录每个 计算过的值,这就是动态规划的思想了,一个问题 分解成 跟小规模的子问题 找到每个子问题 的最优解 保存起来 合在一起就是 这个问题的最优解,就是动态规划的思想了。</p>
 <pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
     let mut arr = Vec::new();
     arr.push(1);

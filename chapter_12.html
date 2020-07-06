@@ -239,7 +239,7 @@ fn main() {
 </code></pre></pre>
 <img src="./img/image-20200706155203491.png" alt="image-20200706155203491" style="zoom:50%;" />
 <h1><a class="header" href="#动态规划思想" id="动态规划思想">动态规划思想</a></h1>
-<p>上面的 递归在改进后,最后我们使用一个数组去记录每个 计算过的值,这就是动态规划的思想了,一个问题 由更小规模 子问题去 组合 找到每个子问题 的最优解 合在一起就是 这个问题的最优解。</p>
+<p>上面的 递归在改进后,最后我们使用一个数组去记录每个 计算过的值,这就是动态规划的思想了,一个问题 分解成 跟小规模的子问题 找到每个子问题 的最优解 保存起来 合在一起就是 这个问题的最优解,就是动态规划的思想了。</p>
 <pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
     let mut arr = Vec::new();
     arr.push(1);
