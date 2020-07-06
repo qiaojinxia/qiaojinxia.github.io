@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="classify.html"><strong aria-hidden="true">2.</strong> 各题型分类整理</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">3.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> Leetcode 第26题 -  删除排序数组中的重复项</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> Leetcode 第108题 -  将有序数组转换为二叉搜索树</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> Leetcode 第32题 -  [最长有效括号]</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> Leetcode 第70题 -  [爬楼梯]</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="classify.html"><strong aria-hidden="true">2.</strong> 各题型分类整理</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">3.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> Leetcode 第26题 -  删除排序数组中的重复项</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> Leetcode 第108题 -  将有序数组转换为二叉搜索树</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> Leetcode 第32题 -  [最长有效括号]</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> Leetcode 第70题 -  [爬楼梯]</a></li><li class="chapter-item expanded "><a href="chapter_14.html"><strong aria-hidden="true">15.</strong> Leetcode 第120题- [三角形最小路径和]</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1724,7 +1724,83 @@ fn main() {
 }
 </code></pre></pre>
 <img src="./img/image-20200706144310727.png" alt="image-20200706144310727" style="zoom:50%;" />
+<h1><a class="header" href="#leetcode-第120题-a-hrefhttpsleetcode-cncomproblemstriangle三角形最小路径和a" id="leetcode-第120题-a-hrefhttpsleetcode-cncomproblemstriangle三角形最小路径和a">Leetcode 第120题 <a href="https://leetcode-cn.com/problems/triangle/">三角形最小路径和</a></a></h1>
+<p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
+<p>相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。</p>
+<p>例如，给定三角形：</p>
+<blockquote>
+<p>[
+[2],
+[3,4],
+[6,5,7],
+[4,1,8,3]
+]</p>
+</blockquote>
+<p>自顶向下的最小路径和为 <code>11</code>（即，<strong>2</strong> + <strong>3</strong> + <strong>5</strong> + <strong>1</strong> = 11）。</p>
+<p><strong>说明：</strong></p>
+<p>如果你可以只使用 <em>O</em>(<em>n</em>) 的额外空间（<em>n</em> 为三角形的总行数）来解决这个问题，那么你的算法会很加分。</p>
+<h1><a class="header" href="#解题思路-9" id="解题思路-9">解题思路</a></h1>
+<p>首先 题目说了自上而下,然后只能往相邻的元素走, 相邻 就是 索引 一样 或者 索引 + 1, 所以 它的next 就是它下一层 的 索引和当前一样 或者索引 +1。</p>
+<p>理论上 要找到 最小的路径和,我们要对所有可能要找的路径 进行计算然后取最小的。</p>
+<h1><a class="header" href="#动态规划-1" id="动态规划-1">动态规划</a></h1>
+<p>这题可以用动态规划的思想,一上来如果没有方向的话,我们 可以找一个小的子问题去解决它,也许写着写着 就有灵感了。那么 我们先尝试着看看 怎么找下一个相邻节点。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn minimum_total(triangle: Vec&lt;Vec&lt;i32&gt;&gt;) -&gt; i32 {
+    let floor =  triangle.len() -1;
+		// triangle.len() -1 最后一层没有下一个节点 不需要找
+    for i in 0..triangle.len() -1{
+        for j  in  0..triangle[i].len(){
+            if  j + 1 &lt; triangle[i + 1].len() {
+                print!(&quot; | {} next {} {}&quot;,triangle[i][j],triangle[i + 1][j],triangle[i + 1][j +1]);
+            }else{
+                print!(&quot;{} next {} &quot;,triangle[i][j],triangle[i + 1][j]);
+            }
 
+        }
+        println!();
+    }
+    1
+
+}
+
+fn main() {
+    let angle:Vec&lt;Vec&lt;i32&gt;&gt; = vec![ vec![2], vec![3,4], vec![6,5,7], vec![4,1,8,3]];
+    minimum_total(angle);
+
+}
+</code></pre></pre>
+<p>我们找到了,每一个数的下一个相邻节点,除了最后一层 没有下一个相邻节点,有了 相邻节点 我们就可以计算 当前 节点 到相邻节点的和了,有了这个基础  我们 只需要 把 每一步 和上一步的 值 相加 就可以得出答案了。</p>
+<p>我的思路是 定义一个lastsummary 用来记录 上一层的信息。</p>
+<img src="./img/image-20200706200455342.png" alt="image-20200706200455342" style="zoom:50%;" />
+<p>如上图,每一个节点 是上一个节点之和, 由于只能往右,所以我们知道每一个节点的上一个节点 必然是 自身的index 或者 index-1 ,那么 我们一开始 使用一个 lastsummary 里面包含一个 0。</p>
+<p>那么 第一层 2 + 0 =2 lastsummary =[2]</p>
+<p>第二层  3 + 2 = 5 、4 + 2 = 6  lastsummary = [5,6]</p>
+<p>我们是通过 当前index 和当前 index -1 索引 的 上一层的 lastsummary,如果 得出2个值,如第三层 10 和 11 ,它们其实所处的位置都是一样的  所以 2者我们取其中最小值,就可以了。</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::cmp::{max, min};
+pub fn minimum_total(triangle: Vec&lt;Vec&lt;i32&gt;&gt;) -&gt; i32 {
+    if  triangle.len() == 0{ return 0;}
+    let  mut sum = vec![0];
+    for i in 0..triangle.len(){
+        let mut floor = vec![];
+        for j  in  0..triangle[i].len(){
+            if  j &lt; 1 {
+                floor.push(sum[j] + triangle[i][j]);
+            }else if( j  == triangle[i].len() -1 ){
+                floor.push(sum[j -1] + triangle[i][j]);
+            } else {
+                floor.push(min(sum[j-1] + triangle[i][j],sum[j] + triangle[i][j]));
+            }
+        }
+        sum = floor;
+    }
+    *sum.iter().min().unwrap()
+}
+fn main() {
+
+    let angle:Vec&lt;Vec&lt;i32&gt;&gt; = vec![ vec![-1], vec![2,3], vec![1,-1,-3]];
+    println!(&quot;{}&quot;,minimum_total(angle));
+}
+</code></pre></pre>
+<img src="./img/image-20200706201103414.png" alt="image-20200706201103414" style="zoom:50%;" />
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
