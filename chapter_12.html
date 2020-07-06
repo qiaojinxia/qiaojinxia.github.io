@@ -176,35 +176,109 @@
 </ol>
 </blockquote>
 <h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
-<p>这题 就是求解斐波那契数, 1 1 2  我们可以使用递归的方式,但是时间复杂度 会非常高,因为 每次递归包含了一些重复的 计算,所以 我们优化的思维是,计算过的 爬第 n阶台阶,我们可以 用O(n)空间去存放,所有之前计算过的台阶。</p>
-<img src="./img/image-20200705232759694.png" alt="image-20200705232759694" style="zoom:50%;" />
-<p>进一步来讲,我们 可以 把问题 看成 </p>
-<p>一个组合问题 </p>
-<p>走一阶台阶 { 1阶 }</p>
-<p>走两阶台阶 {1阶 1阶 、 2阶 }</p>
-<p>走三阶台阶 {1阶 1阶 1阶  、 2阶 1阶、3阶 }</p>
-<p>这样 就变成 组合问题了,拿走三阶为例 我们可以将问转化成 走了 2阶条件下,走三阶该怎么走。</p>
-<p>这就是动态规划的思想。</p>
-<h1><a class="header" href="#代码" id="代码">代码</a></h1>
+<p>爬楼梯 就是进店的斐波那契数的只是字面上换了换了个皮肤,把 生兔子 换成了 爬楼梯。斐波那契数 在物理学上 和自然里 都有应用。</p>
+<p>我们都知道斐波那契函数 是 1 1 2 3 5 8 13</p>
+<p>斐波那契 函数 前 2个 定义为 1 和 1 </p>
+<p>第三个 开始,则是为前 2个数之和 a[n] = a[n-1] + a[n-2]</p>
+<h1><a class="header" href="#递归实现" id="递归实现">递归实现</a></h1>
+<p>那么 再回到爬楼梯的问题上来,我们 爬楼梯 </p>
+<p>如果要爬 0 步 楼梯 有 1一种选择,那就是不动 我们可以理解为 空集 {}</p>
+<p>如果要爬 1步楼梯 我们还是 一种方法 走一步 我们可以理解为 只有一步 {1}</p>
+<table><thead><tr><th>爬楼梯</th><th>方式(爬n-1级 + 1级 或 爬 n-2级 + 2 级)</th></tr></thead><tbody>
+<tr><td>爬 n = 0 级</td><td>{{}}</td></tr>
+<tr><td>爬 n = 1 级</td><td>{{1}}</td></tr>
+<tr><td>爬 n = 2 级</td><td>爬1级 + 1级 = {{1} +{1}} = {1,1} | 爬0级 + 2级 = {} + 2 ={2}   =&gt;  {{1,2},{2}}</td></tr>
+<tr><td>爬 n = 3 级</td><td>爬2级 + 1级 = {{1,2},{2}} + 1 = {1,2,1},{2,1} | 爬1级 + 2级 = {1} + 2 = {1,2}  =&gt; {{1,2,1},{2,1},{1,2}}</td></tr>
+<tr><td>爬 n = 4 级</td><td>爬 3级 + 1级  = {{1,2,1},{2,1},{1,2}} + 1 = {{1,2,1,1},{2,1,1},{1,2,1}}  | 爬2级 + 2级 = {{1,2},{2}} + 2 = {{1,2,2},{2,2}}</td></tr>
+<tr><td>爬 n  级</td><td>爬 n -1级 + 1级   | 爬 n -  2 级 + 2级</td></tr>
+</tbody></table>
+<p>从上面表格 我们可以总结出 这么个公式：<em>f</em>(n*)=<em>f</em>(<em>n</em>−1)+*f(<em>n</em>−2)</p>
 <pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
-    let mut  memo= Vec::with_capacity((n + 1) as usize);
-    for m in 0..(n +1){
-        memo.push(-1);
-    }
-    memo[0] = 1;
-    memo[1] = 1;
-    for  i   in 2..(n + 1) as usize{
-        memo[i] = memo[i -1] + memo[i -2];
-    }
-    return memo[n as usize];
-
+    climb_stairs_memo(n)
 }
 
+pub fn climb_stairs_memo(n: i32) -&gt; i32 {
+		// 爬0步 1种方法
+    if n == 0  { return 1;}
+    // 爬 1步 一种方法
+    if n == 1 {return 1 ;}
+    //f(n)=f(n−1)+f(n−2)
+    return climb_stairs_memo(n -1) + climb_stairs_memo(n - 2);
+}
 fn main() {
     println!(&quot;{}&quot;,climb_stairs(20));
+}
+</code></pre></pre>
+<p>要确定 n 就要 确定 n的 前2项,如果 要求n阶台阶 的走法,那么 2^n级别。但是 如下图 每次计算包含重复的计算,</p>
+<img src="./img/image-20200705232759694.png" alt="image-20200705232759694" style="zoom:50%;" />
+<p>时间复杂度：O(n^2) </p>
+<p>空间复杂度：O(1)</p>
+<p><img src="./img/image-20200706152052371.png" alt="image-20200706152052371" /></p>
+<p>就像上面分析的,由于包含很多重复计算,导致超出了时间复杂度。</p>
+<p>那么我们想要 优化的思路是 可以 用空间复杂度换 时间复杂度,我们可以把 所有计算记忆下来,如果遇到相同的计算直接从数组中返回值，这样 就可以大大 减少不必要的重复运算。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
+    //初始化记忆 数组 为 -1
+    let mut memory:Vec&lt;i32&gt; =  (0..n+1).map(|x| -1).collect();
+    memory[0] = 1;
+    memory[1] = 1;
+    climb_stairs_memo(n,memory.borrow_mut())
+}
+
+pub fn climb_stairs_memo(n: i32,memory:&amp;mut Vec&lt;i32&gt;) -&gt; i32 {
+    if memory[n as usize] != -1 {
+        return memory[n as usize]
     }
+    let res =  climb_stairs_memo(n -1,memory) + climb_stairs_memo(n - 2,memory);
+    //保存数组
+    memory[n as usize] = res;
+    res
+}
+fn main() {
+    println!(&quot;{}&quot;,climb_stairs(20));
+}
+</code></pre></pre>
+<img src="./img/image-20200706155203491.png" alt="image-20200706155203491" style="zoom:50%;" />
+<h1><a class="header" href="#动态规划思想" id="动态规划思想">动态规划思想</a></h1>
+<p>上面的 递归在改进后,最后我们使用一个数组去记录每个 计算过的值,这就是动态规划的思想了,一个问题 由更小规模 子问题去 组合 找到每个子问题 的最优解 合在一起就是 这个问题的最优解。</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
+    let mut arr = Vec::new();
+    arr.push(1);
+    arr.push(1);
+    for i in 2..(n + 1) as usize{
+        arr.push(arr[i-1] + arr[i-2]);
+    }
+    //返回
+    return arr[n as usize];
+
+	}
+fn main() {
+    println!(&quot;{}&quot;,climb_stairs(20));
+}
 </code></pre></pre>
 <img src="./img/image-20200705233627492.png" alt="image-20200705233627492" style="zoom:50%;" />
+<p>我们使用了一个 O(n)  的数组存放了数据,并且 使用了 一次循环,得出：</p>
+<p>空间复杂度： O(n)</p>
+<p>时间复杂度： O(n)</p>
+<h2><a class="header" href="#优化动态规划" id="优化动态规划">优化动态规划</a></h2>
+<p>在这提中,我们计算 n 值 需要 n -1 和 n -2 的值,所以完全没必要 使用一个数组,所以可以 直接使用2各变量替代。</p>
+<p>将 空间复杂度降到 O(1)</p>
+<pre><pre class="playpen"><code class="language-rust editable">pub fn climb_stairs(n: i32) -&gt; i32 {
+    let mut n_2 = 0;
+    let mut n_1 = 1;
+    for i in 0..n as usize
+    {
+        let x = n_2;
+        n_2 = n_1;
+        n_1 = n_1 + x;
+    }
+    return n_1;
+
+}
+fn main() {
+    println!(&quot;{}&quot;,climb_stairs(20));
+}
+</code></pre></pre>
+<img src="./img/image-20200706144310727.png" alt="image-20200706144310727" style="zoom:50%;" />
 
                     </main>
 
