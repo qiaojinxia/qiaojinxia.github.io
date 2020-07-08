@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Leetcode 第27题 -  strStr() 函数(easy) - leetcodebyrust</title>
+        <title> Leetcode 第155题 - [最小栈] - leetcodebyrust</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="classify.html"><strong aria-hidden="true">2.</strong> 各题型分类整理</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">3.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html" class="active"><strong aria-hidden="true">9.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> Leetcode 第26题 -  删除排序数组中的重复项</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> Leetcode 第108题 -  将有序数组转换为二叉搜索树</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> Leetcode 第32题 -  [最长有效括号]</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> Leetcode 第70题 -  [爬楼梯]</a></li><li class="chapter-item expanded "><a href="chapter_14.html"><strong aria-hidden="true">15.</strong> Leetcode 第120题- [三角形最小路径和]</a></li><li class="chapter-item expanded "><a href="chapter_13.html"><strong aria-hidden="true">16.</strong> Leetcode 第198题- [打家劫舍]</a></li><li class="chapter-item expanded "><a href="chapter_15.html"><strong aria-hidden="true">17.</strong> Leetcode 第155题 - [最小栈]</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> 草帽Boy的leetcode笔记</a></li><li class="chapter-item expanded "><a href="classify.html"><strong aria-hidden="true">2.</strong> 各题型分类整理</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">3.</strong> Leetcode 第9题 - 回文数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">4.</strong> Leetcode 第1题 - 两数之和(easy)</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">5.</strong> Leetcode 第15题 - 三数之和(medium)</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">6.</strong> Leetcode 第7题 - 反转整数(medium)</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">7.</strong> Leetcode 第4题 - 寻找两个正序数组的中位数(hard)</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">8.</strong> Leetcode 第27题 - 移除元素(easy)</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">9.</strong> Leetcode 第27题 -  strStr() 函数(easy)</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">10.</strong> Leetcode 第19题 -  删除链表的倒数第N个节点</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">11.</strong> Leetcode 第26题 -  删除排序数组中的重复项</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">12.</strong> Leetcode 第108题 -  将有序数组转换为二叉搜索树</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">13.</strong> Leetcode 第32题 -  [最长有效括号]</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">14.</strong> Leetcode 第70题 -  [爬楼梯]</a></li><li class="chapter-item expanded "><a href="chapter_14.html"><strong aria-hidden="true">15.</strong> Leetcode 第120题- [三角形最小路径和]</a></li><li class="chapter-item expanded "><a href="chapter_13.html"><strong aria-hidden="true">16.</strong> Leetcode 第198题- [打家劫舍]</a></li><li class="chapter-item expanded "><a href="chapter_15.html" class="active"><strong aria-hidden="true">17.</strong> Leetcode 第155题 - [最小栈]</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,133 +150,127 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#leetcode-第27题----strstr-函数easy" id="leetcode-第27题----strstr-函数easy">Leetcode 第27题 -  strStr() 函数(easy)</a></h1>
-<p>实现 strStr() 函数。</p>
-<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
-<p><strong>示例 1:</strong></p>
+                        <h1><a class="header" href="#leetcode-第155题-a-hrefhttpsleetcode-cncomproblemsmin-stack-最小栈a" id="leetcode-第155题-a-hrefhttpsleetcode-cncomproblemsmin-stack-最小栈a">Leetcode 第155题 <a href="https://leetcode-cn.com/problems/min-stack/"> 最小栈</a></a></h1>
+<p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
+<p>push(x) —— 将元素 x 推入栈中。
+pop() —— 删除栈顶的元素。
+top() —— 获取栈顶元素。
+getMin() —— 检索栈中的最小元素。</p>
+<p><strong>示例:</strong></p>
 <blockquote>
-<p>输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
-输出: 2</p>
+<p>输入：
+[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]
+[[],[-2],[0],[-3],[],[],[],[]]</p>
+<p>输出：
+[null,null,null,null,-3,null,0,-2]</p>
+<p>解释：
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --&gt; 返回 -3.
+minStack.pop();
+minStack.top();      --&gt; 返回 0.
+minStack.getMin();   --&gt; 返回 -2.</p>
 </blockquote>
-<p><strong>示例 2:</strong></p>
-<blockquote>
-<p>输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
-输出: -1</p>
-</blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>pop</code>、<code>top</code> 和 <code>getMin</code> 操作总是在 <strong>非空栈</strong> 上调用</li>
+</ul>
 <h1><a class="header" href="#解题思路" id="解题思路">解题思路</a></h1>
-<p>这题可以使用 暴力解法,2层循环 一层 指向 一个字符 内层去逐一 的匹配 字符串。</p>
-<p>时间复杂度 是$ O(n^2)$</p>
-<p>空间复杂度 $O(1)$</p>
-<p>我们 想要尝试另一种做法,KMP算法。</p>
-<p>时间复杂度 $O(N)$</p>
-<p>空间复杂度 $O(M)$</p>
-<h1><a class="header" href="#kmp算法" id="kmp算法">KMP算法</a></h1>
-<p>kmp 算法 代码 非常简洁,紧凑但是 要理解起来还是有一定难度的。</p>
-<p>kmp算法分为2步</p>
-<ol>
-<li>
-<p>首先要构建 一个 next数组。</p>
-</li>
-<li>
-<p>根据 next 数组直接匹配。</p>
-</li>
-</ol>
-<p>首先 讲这个算法 之前 要明白 普通的双指针为什么 不可以匹配。</p>
-<img src="./image-20200701182051646.png" alt="image-20200701182051646" style="zoom:50%;" />
-<p>我们 可以看到 如果定义 2个指针(索引),从0 开始 指向 2个 数组,不相等 i就往后移,当相等 时 i和 j 都往后移</p>
-<p>直到 i 和 j 指向的值不同 那么 就匹配结束。这种思维 是很普遍的 看起来很美好。</p>
-<p>如上的数组 如果这么找 的话 , 当  i =  4 处 结束匹配 把 j 重置为 0,i 往后 开始下一轮匹配,这样很明显 后边还剩下 </p>
-<p>ba 匹配不到 bcba,但是事实上 如果我们忽略掉 i = 1 处的匹配,从 i = 3 处匹配 完全就能匹配的到。我们为了便于讨论 把这个问题先起个名字 叫做 &quot;模式重复错误&quot;.</p>
-<p>因为 第一次 的匹配导致后面不能完全匹配到字符, 首先 我们思考下 匹配的基本条件至少是开头要一样吧, 那么 也就是说 匹配的字符串 有一个特点，那就是 有和 开头那个字符 一样重复的 字符。</p>
-<p>打个比方   abc 我们 可以把 </p>
-<p>所有的子集 称为 {a,b,c,ab,bc,abc}  a模式 b模式 c模式 以此类推。</p>
-<p>我们 把 所有 a 开头的 起个昵称 称为 开机模式群 {abcx}</p>
-<p>我们 判定 某个字符都是从首字母开始的 也就是说 只要是 &quot;开机模式群&quot; 那么 我们就可以记一次 匹配字符串。</p>
-<p>在 abc 中 开机模式群 只有一种组合 ,所以我们只需要 一次判断 。</p>
-<p>但如果改成 aba 呢  里面 有2个 a 就有可能 {abax,ax} 就变成了 2种 组合,那么 就要 两次 匹配。</p>
-<p>但是当我们 处在 一次匹配模式中,没法中途退出 就会出现 上面的 &quot;模式重复错误&quot; 问题。</p>
-<p>那么 解决这个问题,的关键 是 如果我们知道 匹配字符串 包含 几种 &quot;开机模式群&quot; 的组合,那么 我们匹配错误的时候解出 一次匹配模式 然后切换到 另一种 &quot;开机模式群&quot; 状态 就可以 解决这个问题。</p>
-<p>那怎么 切换呢,其实 {ax} 是 {abax}的子集,它们 之间 索引相差 值就好了,PMT表其实 就是计算 每个状态 切换 索引之间切相差的值。</p>
-<p>而 next 表就是类似这样一个东西 ,让你从 &quot;开机模式群&quot;一种状态 切换到另一种 &quot;开机模式群&quot; 状态.</p>
-<img src="./image-20200701185444874.png" alt="image-20200701185444874" style="zoom:50%;" />
-<img src="./image-20200701185613169.png" alt="image-20200701185613169" style="zoom:50%;" />
-<p>参考资料：https://www.bilibili.com/video/BV1Ys411d7yh?t=710</p>
-<pre><pre class="playpen"><code class="language-rust editable">use std::borrow::Borrow;
-pub fn get_next(needle: &amp;String) -&gt; Vec&lt;i32&gt; {
-    let mut tmpvec = Vec::with_capacity(needle.len());
-    tmpvec.push(0);
-    let mut j = 0;
-    let mut i = 1;
-    for _ in 1..needle.len() {
-        if needle.as_bytes()[i] != needle.as_bytes()[j] {
-            while needle.as_bytes()[i] != needle.as_bytes()[j] &amp;&amp; j &gt;= 1 {
-                j = tmpvec[j - 1];
-            }
-        }
-        if needle.as_bytes()[i] == needle.as_bytes()[j] {
-            j += 1;
-        }
-        tmpvec.push(j);
-        i += 1;
-    }
-
-    let mut next: Vec&lt;i32&gt; = Vec::with_capacity(needle.len());
-    next.push(-1);
-    for i in 0..tmpvec.len() - 1 {
-        next.push(tmpvec[i] as i32);
-    }
-    next
-}
-
-pub fn str_str(haystack: String, needle: String) -&gt; i32 {
-    if needle.len() == 0 {
-        return 0;
-    }
-    let next = get_next(needle.borrow());
-    let mut i = 0;
-    let mut j = 0;
-    while i &lt; haystack.len() {
-        if haystack.as_bytes()[i] == needle.as_bytes()[j] {
-            j += 1;
-            if j == needle.len() {
-                return (i - j + 1) as i32;
-            }
-            i += 1;
-        } else {
-            if j != 0 {
-                j = next[j] as usize;
-            }else{
-                i += 1;
-            }
-        }
-
-    }
-    return -1;
-}
-
-fn main() {
-    let str1 = String::from(&quot;mississippi&quot;);
-    let str2 = String::from(&quot;issip&quot;);
-    println!(&quot;{}&quot;, str_str(str1, str2));
+<p>这道题目主要考察数据结构,实现起来也很简单 我们定义一个额外的栈 存放最小值,比较下 比辅助栈内元素小的话 就入栈。</p>
+<p>入栈 3 
+|   |    |   |
+|   |    |   |
+|<em>3</em>|    |<em>3</em>|
+stack  minStack</p>
+<p>入栈 5 ， 5 大于 minStack 栈顶，不处理
+|   |    |   |
+| 5 |    |   |
+|<em>3</em>|    |<em>3</em>|
+stack  minStack</p>
+<p>入栈 2 ，此时右边的 minStack 栈顶就保存了当前最小值 2 
+| 2 |    |   |
+| 5 |    | 2 |
+|<em>3</em>|    |<em>3</em>|
+stack  minStack</p>
+<p>出栈 2，此时右边的 minStack 栈顶就保存了当前最小值 3
+|   |    |   |
+| 5 |    |   |
+|<em>3</em>|    |<em>3</em>|
+stack  minStack</p>
+<p>出栈 5，右边 minStack 不处理
+|   |    |   |
+|   |    |   |
+|<em>3</em>|    |<em>3</em>|
+stack  minStack</p>
+<p>出栈 3
+|   |    |   |
+|   |    |   |
+|_ <em>|    |</em> _|
+stack  minStack</p>
+<p>这道题可以帮助我们 熟悉如何用 Rust 栈 数据结构我们用Vec 数组来存储栈元素。</p>
+<pre><pre class="playpen"><code class="language-rust editable">struct MinStack {
+    stack:Vec&lt;i32&gt;,
+    minstack:Vec&lt;i32&gt;,
 
 }
 
+
+/**
+ * `&amp;self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&amp;mut self` instead.
+ */
+impl MinStack {
+
+    /** initialize your data structure here. */
+    fn new() -&gt; Self {
+        MinStack {
+            stack: vec![],
+            minstack: vec![],
+        }
+    }
+
+    fn push(&amp;mut self, x: i32) {
+        self.stack.push(x);
+        if self.minstack.len() == 0 ||
+            x &lt;= self.get_min(){  self.minstack.push(x)
+        }
+
+    }
+
+    fn pop(&amp;mut self) {
+        if self.stack[self.stack.len()-1] == self.minstack[self.minstack.len()-1] {
+            self.minstack.remove(self.minstack.len()-1);
+
+        }
+        self.stack.remove(self.stack.len()-1);
+
+    }
+
+    fn top(&amp;self) -&gt; i32 {
+
+        self.stack[self.stack.len()-1]
+    }
+
+    fn get_min(&amp;self) -&gt; i32 {
+        if self.minstack.len() ==0 {  return 0;}
+        self.minstack[self.minstack.len()-1]
+    }
+}
 </code></pre></pre>
-<img src="./image-20200701193612961.png" alt="image-20200701193612961" style="zoom:50%;" />
+<img src="./img/image-20200708234529054.png" alt="image-20200708234529054" style="zoom:50%;" />
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="chapter_6.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_13.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="chapter_8.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -286,15 +280,11 @@ fn main() {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="chapter_6.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_13.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="chapter_8.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
