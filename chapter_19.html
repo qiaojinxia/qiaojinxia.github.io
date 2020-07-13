@@ -200,39 +200,30 @@
 <tr><td>1/2</td><td>0.5 有限小数</td></tr>
 <tr><td>-1/4 或 1/-4</td><td>结果为负数,输入一个为正,一个为负</td></tr>
 <tr><td>-1/-4</td><td>结果为正数,但是输入是2个负数</td></tr>
-<tr><td>−1/−2147483648</td><td>可能存在 越界</td></tr>
-<tr><td>−2147483648  / -1</td><td>可能会溢出</td></tr>
+<tr><td>−2147483648 /-1</td><td>可能存在 越界</td></tr>
 </tbody></table>
 <p>对于 正数 触发 我们判断下 余数 为 0 代表是有限小数 直接返回即可。</p>
 <p>对于一些特殊情况,如 负数 我们需要把 余数 和商 都 转化成 正数 当做正数去计算,返回结果时 加上负号即可。</p>
 <p>对于上表最后 由于i32 所能表示的整数范围 比 负数范围 少 1 正数范围 为 0~ 2 ** 31 -1 =[0,2147483647] 负数范围 为 -1 ~ 2**31 =[-1,-2147483648] </p>
 <p>所以 −2147483648  / -1 =2147483648  超出了i32表示的最大值就会溢出。</p>
-<p>没什么特别好的方法,而且 特殊情况 就这两种 就直记录值处理了。 </p>
+<p>所以 我们在处理的时候 需要 把 i32 转换成 i64 来防止溢出. </p>
 <pre><pre class="playpen"><code class="language-rust editable">use std::collections::HashMap;
 use std::borrow::Borrow;
 
-
 pub fn fraction_to_decimal(numerator: i32, denominator: i32) -&gt; String {
-        //特殊情况 直接干掉
-        if numerator == std::i32::MIN &amp;&amp; denominator == -1{
-            return &quot;2147483648&quot;.parse().unwrap();
-        }
-        //特殊情况 直接干掉
-        if denominator == std::i32::MIN &amp;&amp; numerator == -1{
-            return &quot;0.0000000004656612873077392578125&quot;.parse().unwrap();
-        }
-        let mut denominator = denominator;
+        //转换为 i64类型 防止溢出
+        let numerator = numerator as i64;
+        let mut denominator = denominator as i64;
         let mut res = String::new();
-        let mut quotient = numerator / denominator;
-        let mut remainder =  numerator % denominator;
+        let mut quotient = numerator  / denominator  ;
+        let mut remainder =  numerator % denominator ;
         let mut  isnav = false;
         //如果余数为 6 能被整除 ,那么直接返回
         if  remainder == 0 {
             return quotient.to_string();
         }
-
         //处理负数的情况 如果 结果为 - 的 那我们这里标记下 后面还是按正数处理,最后返回的时候加上 -
-        if  (numerator as i64  * denominator  as i64 ) &lt; 0  {
+        if  (numerator   * denominator ) &lt; 0  {
             quotient *= -1;
             isnav = true;
 
@@ -243,8 +234,7 @@ pub fn fraction_to_decimal(numerator: i32, denominator: i32) -&gt; String {
         }
         //把负数转化为正数处理
         if  denominator &lt; 0{
-            denominator *=-1;
-
+                denominator *=-1;
         }
 
         //小数点后面 索引 可以记录
@@ -265,7 +255,7 @@ pub fn fraction_to_decimal(numerator: i32, denominator: i32) -&gt; String {
                 break;
             }
             recoder.insert(remainder,i);
-            quotient = remainder * 10 / denominator;
+            quotient = remainder * 10 / denominator ;
             remainder = remainder  * 10 % denominator;
             i+=1;
         }
@@ -277,7 +267,7 @@ pub fn fraction_to_decimal(numerator: i32, denominator: i32) -&gt; String {
         res
     }
     //计算整数部分大小
-    pub fn helprer(num:i32) -&gt; i32{
+    pub fn helprer(num:i64) -&gt; i32{
         if num == 0{
             return 1;
         }
@@ -288,8 +278,8 @@ pub fn fraction_to_decimal(numerator: i32, denominator: i32) -&gt; String {
             res +=1;
         }
         res
-    }
-
+}
+   
 fn main() {
         println!(&quot;{}&quot;, fraction_to_decimal(2147483647,370000));
 
