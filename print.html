@@ -2668,7 +2668,7 @@ pub fn restore_ip_addresses(s: String) -&gt; Vec&lt;String&gt; {
 }
 
 pub fn dfs(start:usize, s:&amp;String, segment:usize, strs: &amp;String, list:&amp;mut Vec&lt;String&gt;){
-    //每段ip 取 1~ 4个数 
+    //每段ip 取 1~ 3位 
     for i in 0..3{
     		// 因为 每一段有 3 种位数取法 所以拷贝一份,比如 2.x 25.x 255.X 
         let mut strs = strs.clone();
