@@ -277,10 +277,10 @@ pub fn simplify_path(path: String) -&gt; String {
     let mut m_stack = Vec::with_capacity(paths.len());
     for i in 0..paths.len(){
         match  paths[i] {
-            val if val == &quot;..&quot; =&gt;{ if m_stack.is_empty(){continue}; m_stack.pop();}
-            val if val == &quot;.&quot; =&gt;{continue}
-            val if val != &quot;&quot; =&gt;{m_stack.push(String::from(&quot;/&quot;).add(val));}
-            val =&gt;{},
+            &quot;..&quot; =&gt;{ if m_stack.is_empty(){continue}; m_stack.pop();}
+            &quot;.&quot; | &quot;&quot; =&gt;{continue}
+            val =&gt;{m_stack.push(String::from(&quot;/&quot;).add(val));}
+
         }
     }
     if m_stack.is_empty(){
