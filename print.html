@@ -2812,7 +2812,7 @@ pub fn simplify_path(path: String) -&gt; String {
 
 }
 fn main() {
-    println!(&quot;ouputFile {:?}&quot;,simplify_path(String::from(&quot;/a/../../b/../c//.//  &quot;)));
+    println!(&quot;ouputFile {:?}&quot;,simplify_path(String::from(&quot;/a/../../b/../c//.//&quot;)));
 }
 </code></pre></pre>
 <p>算法复杂度：O(n)</p>
