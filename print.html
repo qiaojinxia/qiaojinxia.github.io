@@ -2759,6 +2759,7 @@ fn main() {
 <p>/* 表示当前目录下的某一个目录</p>
 <p>我们 可以从前往后也可以从后往前的出来这个路径,但是从后往前比较容易</p>
 <p>比如 你遇到 /home/.. 从前往后 你要把/home 路径先加上 然后 碰到/.. 你再要把 home 路径 截掉,但是从后往前 我们直接跳过 就好了。</p>
+<p>另一种思路是,从前往后 可以用栈的思路, 如果遇到 .. 就出栈,入到 . 就不管了 ,遇到目录就压栈。</p>
 <h1><a class="header" href="#分割路径--反向遍历" id="分割路径--反向遍历">分割路径 + 反向遍历</a></h1>
 <p>所以 我们的思路是从后往前,</p>
 <p>我们先把 路径 通过 &quot;/&quot; 分割 ,那么 路径 然后我们再 把所有路径可能的情况处理下就好了,</p>
@@ -2781,7 +2782,7 @@ pub fn simplify_path(path: String) -&gt; String {
         }
         //反相遍历
         match *splits.get(pathlen - index).unwrap() {
-            val if val == &quot;..&quot; =&gt; { skip +=1;}, //处理上级目录 比如/home/.. 直接跳过home目录
+            val if val == &quot;..&quot; =&gt; { skip +=1;}, //处理上级目录 比如/home/.. skip计数器 + 1直接跳过home目录
             val if val == &quot;.&quot; =&gt; {},//当前目录 不做任何 处理
             val if val != &quot;&quot;  =&gt;{
                 if skip ==0 {
@@ -2790,6 +2791,7 @@ pub fn simplify_path(path: String) -&gt; String {
                     tmp.push( val);
 
                 }else {
+                		//如果之前遇到过 ../ 跳过目录 skip计数器 -1
                     skip -=1;
                 }
             },
@@ -2816,8 +2818,41 @@ fn main() {
 }
 </code></pre></pre>
 <p>算法复杂度：O(n)</p>
-<p>时间复杂度：O(1)</p>
+<p>时间复杂度：O(n)</p>
 <img src="./img/image-20200717130843902.png" alt="image-20200717130843902" style="zoom:50%;" />
+<h1><a class="header" href="#路径分割--栈" id="路径分割--栈">路径分割 + 栈</a></h1>
+<p>这种方法 我们模拟栈的操作 ,这种方法在书写实现和性能上,都会优于上一种。</p>
+<p>当遇到 正常路径 我们把目录 压栈 </p>
+<p>当遇到 &quot;..&quot; 我们弹出栈</p>
+<p>当遇到 &quot;.&quot; 我们跳过</p>
+<p>当遇到 &quot;&quot; 我们跳过</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::ops::Add;
+
+pub fn simplify_path(path: String) -&gt; String {
+    let paths:Vec&lt;&amp;str&gt; = path.split(&quot;/&quot;).collect();
+    let mut m_stack = Vec::with_capacity(paths.len());
+    for i in 0..paths.len(){
+        match  paths[i] {
+            val if val == &quot;..&quot; =&gt;{ if m_stack.is_empty(){continue}; m_stack.pop();}
+            val if val == &quot;.&quot; =&gt;{continue}
+            val if val != &quot;&quot; =&gt;{m_stack.push(String::from(&quot;/&quot;).add(val));}
+            val =&gt;{},
+        }
+    }
+    if m_stack.is_empty(){
+        m_stack.push(&quot;/&quot;.to_string());
+    }
+    m_stack.iter().map(|x|x).map(|x| x.to_string()).collect()
+
+
+}
+fn main() {
+    println!(&quot;ouputFile {:?}&quot;,simplify_path(String::from(&quot;/../&quot;)));
+}
+</code></pre></pre>
+<p>算法复杂度：O(n)</p>
+<p>时间复杂度：O(n)</p>
+<img src="./img/image-20200717134113089.png" alt="image-20200717134113089" style="zoom:50%;" />
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
